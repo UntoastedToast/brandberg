@@ -437,6 +437,10 @@ header {
   background-color: #333;
 }
 
+map {
+  overflow: hidden;
+}
+
 /*-------------
  	  Footer
 -------------*/
