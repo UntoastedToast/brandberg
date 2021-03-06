@@ -275,6 +275,14 @@ header {
   min-height: 50vh !important;
 }
 
+.banner-small h1 {
+  font-size: 36px;
+}
+
+.banner-small h2 {
+  font-size: 24px;
+}
+
 .banner .background-image {
   position: absolute;
   top: 0;
@@ -595,14 +603,11 @@ footer p a {
   text-align: justify;
   word-wrap: break-word;
   overflow: hidden;
-  white-space: pre-wrap; /* CSS3 */
-  white-space: -moz-pre-wrap; /* Firefox */
-  white-space: -pre-wrap; /* Opera <7 */
-  white-space: -o-pre-wrap; /* Opera 7 */
 }
 
 .p-coll p {
   padding-bottom: 15px;
+  word-wrap: break-word;
 }
 
 @media (max-width: 800px) {
