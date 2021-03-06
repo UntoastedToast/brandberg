@@ -195,7 +195,7 @@ header {
 }
 
 .menu-list li:hover {
-  background-color: #70AED8;
+  background-color: #70aed8;
   transition: 0.4s linear;
   border-radius: 4px;
 }
@@ -234,7 +234,7 @@ header {
     text-align: center;
     background: #214254;
     transition: all 0.3s ease;
-    box-shadow: 5px 0px 10px 0px rgba(0,0,0,0.3);
+    box-shadow: 5px 0px 10px 0px rgba(0, 0, 0, 0.3);
   }
   .navbar.show .menu-list {
     left: 0%;
@@ -595,6 +595,10 @@ footer p a {
   text-align: justify;
   word-wrap: break-word;
   overflow: hidden;
+  white-space: pre-wrap; /* CSS3 */
+  white-space: -moz-pre-wrap; /* Firefox */
+  white-space: -pre-wrap; /* Opera <7 */
+  white-space: -o-pre-wrap; /* Opera 7 */
 }
 
 .p-coll p {
