@@ -437,7 +437,7 @@ header {
   background-color: #333;
 }
 
-map {
+#map {
   overflow: hidden;
 }
 
