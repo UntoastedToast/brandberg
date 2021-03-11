@@ -35,7 +35,10 @@
 
 
 // Function to filter the JSON file "TableOfSitesKoordinaten"
+
     function filterData(tableSites) {
+
+        /* The values of the selected select boxes are passed to a respective variable */
 
         // Gorge
         var gorgeSelect = document.getElementById("gorgeSelect");
@@ -53,22 +56,35 @@
         var figurecategorySelect = document.getElementById("figurecategorySelect");
         figurecategorySelect = figurecategorySelect.options[figurecategorySelect.selectedIndex].value;
 
+        /*  In this case, the filter() method was used, which creates a new array.
+            https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
+
+            Logical operators were used to ensure the shortest possible notation. This has the advantage that a complex filter system can be built up with little time expenditure.
+            https://www.w3schools.com/js/js_comparisons.asp
+            
+            Explanation:
+            !variable evaluates to true if the variable is falsy and false if the variable is truthy.
+            variable === variable checks if there is a strict equality.
+            !variable || (variable === variable) evaluates to the first truthy operand.
+            (a) && (b) evaluates to the first falsy operand */
+
         var filteredData = tableSites.filter((s) => {
-            return (!gorgeSelect || s.Gorge === gorgeSelect) &&
-                (!waterSelect || s.WaterAvailability === waterSelect) &&
-                (!openfieldSelect || s.OpenField === openfieldSelect) &&
-                (!figurecategorySelect || s.FigureCategory === figurecategorySelect);
+            return  (!gorgeSelect || s.Gorge === gorgeSelect) &&
+                    (!waterSelect || s.WaterAvailability === waterSelect) &&
+                    (!openfieldSelect || s.OpenField === openfieldSelect) &&
+                    (!figurecategorySelect || s.FigureCategory === figurecategorySelect);
         });
         console.log(filteredData);
         output(filteredData);
     }
 
-    document.getElementById("filterBtn").addEventListener("click", s => {
-        filterData(tableSites); hideGuide();
-    });
+    // Event Listener for filterBtn
+        document.getElementById("filterBtn").addEventListener("click", s => {
+            filterData(tableSites); hideGuide();
+        });
 
 
-// Function, die das guideDIV ausblendet
+// Function that hides the guideDIV
     function hideGuide() {
         document.getElementById("guideDIV").style.display = "none";
     }
@@ -175,89 +191,89 @@ function output(filteredData) {
                 } else {
                     pDateOfDiscovery.textContent = "Date of Discovery: " + "N/A";
                 };
-            pPublication.textContent = "Publication: " + filteredData[i].Publication + " ISBN: " + filteredData[i].ISBN10;
-            pNumberofFigures.textContent = "Number of Figures: " + filteredData[i].NumberofFigures;
-            pFigureCategory.textContent = "Figure Category: " + filteredData[i].FigureCategory;
-            pPaintingLocation.textContent = "Painting Location: " + filteredData[i].PaintingLocation;
-            pNextSite.textContent = "Next Site: " + filteredData[i].NextSite;
-            pCardinalPoints.textContent = "Cardinal Points: " + filteredData[i].CardinalPoints;
-            pWaterAvailability.textContent = "Water Availability: " + filteredData[i].WaterAvailability;
-            pOpenField.textContent = "Open Field: " + filteredData[i].OpenField;
-            pLivingPlace.textContent = "Living Place: " + filteredData[i].LivingPlace;
-            pSpatiality.textContent = "Spatiality: " + filteredData[i].Spatiality;
-            pContext.textContent = "Context: " + filteredData[i].Context;
-            pViewfromSite.textContent = "View from Site: " + filteredData[i].ViewfromSite;
-            pVisibility.textContent = "Visibility: " + filteredData[i].Visibility;
-            pEvidenceofHumanOccupation.textContent = "Evidence of Human Occupation " + filteredData[i].EvidenceofHumanOccupation;
-            pDegradationofPaintings.textContent = "Degradation of Paintings: " + filteredData[i].DegradationofPaintings;
-            pQuantityofArtefacts.textContent = "Quantity of Artefacts: " + filteredData[i].QuantityofArtefacts;
-            pLithics.textContent = "Lithics: " + filteredData[i].Lithics;
-            pPottery.textContent = "Pottery: " + filteredData[i].Pottery;
-            pOES.textContent = "O.E.S.: " + filteredData[i].OES;
-            pBone.textContent = "Bone: " + filteredData[i].Bone;
-            pCharcoal.textContent = "Charcoal: " + filteredData[i].Charcoal;
-            pGrindingImplements.textContent = "Grinding Implements: " + filteredData[i].GrindingImplements;
-            pStoneStructures.textContent = "Stone Structures: " + filteredData[i].StoneStructures;
-            pMiscellenousArtefact.textContent = "Miscellenous Artefact: " + filteredData[i].MiscellenousArtefact;
-            if (filteredData[i].Remarks[0] != null) {
-                pRemarks.textContent = "Remarks: " + filteredData[i].Remarks;
-            } else {
-                pRemarks.textContent = "Remarks: " + "N/A";
-            };
+                pPublication.textContent = "Publication: " + filteredData[i].Publication + " ISBN: " + filteredData[i].ISBN10;
+                pNumberofFigures.textContent = "Number of Figures: " + filteredData[i].NumberofFigures;
+                pFigureCategory.textContent = "Figure Category: " + filteredData[i].FigureCategory;
+                pPaintingLocation.textContent = "Painting Location: " + filteredData[i].PaintingLocation;
+                pNextSite.textContent = "Next Site: " + filteredData[i].NextSite;
+                pCardinalPoints.textContent = "Cardinal Points: " + filteredData[i].CardinalPoints;
+                pWaterAvailability.textContent = "Water Availability: " + filteredData[i].WaterAvailability;
+                pOpenField.textContent = "Open Field: " + filteredData[i].OpenField;
+                pLivingPlace.textContent = "Living Place: " + filteredData[i].LivingPlace;
+                pSpatiality.textContent = "Spatiality: " + filteredData[i].Spatiality;
+                pContext.textContent = "Context: " + filteredData[i].Context;
+                pViewfromSite.textContent = "View from Site: " + filteredData[i].ViewfromSite;
+                pVisibility.textContent = "Visibility: " + filteredData[i].Visibility;
+                pEvidenceofHumanOccupation.textContent = "Evidence of Human Occupation " + filteredData[i].EvidenceofHumanOccupation;
+                pDegradationofPaintings.textContent = "Degradation of Paintings: " + filteredData[i].DegradationofPaintings;
+                pQuantityofArtefacts.textContent = "Quantity of Artefacts: " + filteredData[i].QuantityofArtefacts;
+                pLithics.textContent = "Lithics: " + filteredData[i].Lithics;
+                pPottery.textContent = "Pottery: " + filteredData[i].Pottery;
+                pOES.textContent = "O.E.S.: " + filteredData[i].OES;
+                pBone.textContent = "Bone: " + filteredData[i].Bone;
+                pCharcoal.textContent = "Charcoal: " + filteredData[i].Charcoal;
+                pGrindingImplements.textContent = "Grinding Implements: " + filteredData[i].GrindingImplements;
+                pStoneStructures.textContent = "Stone Structures: " + filteredData[i].StoneStructures;
+                pMiscellenousArtefact.textContent = "Miscellenous Artefact: " + filteredData[i].MiscellenousArtefact;
+                if (filteredData[i].Remarks[0] != null) {
+                    pRemarks.textContent = "Remarks: " + filteredData[i].Remarks;
+                } else {
+                    pRemarks.textContent = "Remarks: " + "N/A";
+                };
 
-        // Assign elements visibleElement
-            visibleElement.appendChild(hGorgeName);
-            visibleElement.appendChild(pCoordinates);
+            // Assign elements visibleElement
+                visibleElement.appendChild(hGorgeName);
+                visibleElement.appendChild(pCoordinates);
 
-        // Assign elements nonvisibleElement
-            nonvisibleElement.appendChild(pSiteNickname);
-            nonvisibleElement.appendChild(pDiscoverer);
-            nonvisibleElement.appendChild(pDateOfDiscovery);
-            nonvisibleElement.appendChild(pPublication);
-            nonvisibleElement.appendChild(pNumberofFigures);
-            nonvisibleElement.appendChild(pFigureCategory);
-            nonvisibleElement.appendChild(pPaintingLocation);
-            nonvisibleElement.appendChild(pNextSite);
-            nonvisibleElement.appendChild(pCardinalPoints);
-            nonvisibleElement.appendChild(pWaterAvailability);
-            nonvisibleElement.appendChild(pOpenField);
-            nonvisibleElement.appendChild(pLivingPlace);
-            nonvisibleElement.appendChild(pSpatiality);
-            nonvisibleElement.appendChild(pContext);
-            nonvisibleElement.appendChild(pViewfromSite);
-            nonvisibleElement.appendChild(pVisibility);
-            nonvisibleElement.appendChild(pEvidenceofHumanOccupation);
-            nonvisibleElement.appendChild(pDegradationofPaintings);
-            nonvisibleElement.appendChild(pQuantityofArtefacts);
-            nonvisibleElement.appendChild(pLithics);
-            nonvisibleElement.appendChild(pPottery);
-            nonvisibleElement.appendChild(pOES);
-            nonvisibleElement.appendChild(pBone);
-            nonvisibleElement.appendChild(pCharcoal);
-            nonvisibleElement.appendChild(pGrindingImplements);
-            nonvisibleElement.appendChild(pStoneStructures);
-            nonvisibleElement.appendChild(pMiscellenousArtefact);
-            nonvisibleElement.appendChild(pRemarks);
+            // Assign elements nonvisibleElement
+                nonvisibleElement.appendChild(pSiteNickname);
+                nonvisibleElement.appendChild(pDiscoverer);
+                nonvisibleElement.appendChild(pDateOfDiscovery);
+                nonvisibleElement.appendChild(pPublication);
+                nonvisibleElement.appendChild(pNumberofFigures);
+                nonvisibleElement.appendChild(pFigureCategory);
+                nonvisibleElement.appendChild(pPaintingLocation);
+                nonvisibleElement.appendChild(pNextSite);
+                nonvisibleElement.appendChild(pCardinalPoints);
+                nonvisibleElement.appendChild(pWaterAvailability);
+                nonvisibleElement.appendChild(pOpenField);
+                nonvisibleElement.appendChild(pLivingPlace);
+                nonvisibleElement.appendChild(pSpatiality);
+                nonvisibleElement.appendChild(pContext);
+                nonvisibleElement.appendChild(pViewfromSite);
+                nonvisibleElement.appendChild(pVisibility);
+                nonvisibleElement.appendChild(pEvidenceofHumanOccupation);
+                nonvisibleElement.appendChild(pDegradationofPaintings);
+                nonvisibleElement.appendChild(pQuantityofArtefacts);
+                nonvisibleElement.appendChild(pLithics);
+                nonvisibleElement.appendChild(pPottery);
+                nonvisibleElement.appendChild(pOES);
+                nonvisibleElement.appendChild(pBone);
+                nonvisibleElement.appendChild(pCharcoal);
+                nonvisibleElement.appendChild(pGrindingImplements);
+                nonvisibleElement.appendChild(pStoneStructures);
+                nonvisibleElement.appendChild(pMiscellenousArtefact);
+                nonvisibleElement.appendChild(pRemarks);
 
-        // Assign elements section
-            section.appendChild(visibleElement);
-            section.appendChild(nonvisibleElement);
-            section.appendChild(btnToggleContent);
+            // Assign elements section
+                section.appendChild(visibleElement);
+                section.appendChild(nonvisibleElement);
+                section.appendChild(btnToggleContent);
 
-        // Assign section to outputDIV
-            outputDIV.appendChild(section);
+            // Assign section to outputDIV
+                outputDIV.appendChild(section);
 
-        // Dispalay = "none" for nonvisibleElement
-            nonvisibleElement.style.display = "none";
+            // Dispalay = "none" for nonvisibleElement
+                nonvisibleElement.style.display = "none";
 
-        // Each button and content is added to the array to be accessed later in the "toggleContent" function
-        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push
-            buttonArray.push(btnToggleContent);
-            contentArray.push(nonvisibleElement);
+            // Each button and content is added to the array to be accessed later in the "toggleContent" function
+            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push
+                buttonArray.push(btnToggleContent);
+                contentArray.push(nonvisibleElement);
     }
 
     // The hit count of the search
-        document.getElementById("resultsCountDIV").innerHTML = "<p>Your search returned " + resultsCount + " results.</p>";
+        document.getElementById("resultsCountDIV").innerHTML = "<p>Your search returned " + "<b>" + resultsCount + "</b>" + " results.</p>";
 
     // Capture the position of btnToggleContent by a for-loop and pass itself to the toggleContent function
         for (let iButton = 0; iButton < buttonArray.length; iButton++) {

@@ -136,19 +136,19 @@ header {
 .content {
   max-width: 1600px;
   margin: auto;
-  padding: 0 50px;
+  padding: 0 80px;
 }
 
 .navbar {
   position: fixed;
   width: 100%;
   z-index: 99;
-  padding: 25px 0;
+  padding: 35px 0;
   transition: all 0.3s ease;
 }
 .navbar.sticky {
   background: #1b4256;
-  padding: 10px 0;
+  padding: 15px 0;
   box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.2);
 }
 
@@ -163,6 +163,7 @@ header {
   font-size: 25px;
   font-weight: 700;
   text-decoration: none;
+  padding: 10px 0;
 }
 
 .logo-sticky {
@@ -180,7 +181,7 @@ header {
 
 .menu-list li {
   list-style: none;
-  padding: 20px 30px;
+  padding: 15px 25px;
 }
 
 .menu-list li a {
@@ -212,7 +213,7 @@ header {
   top: 20px;
 }
 
-@media (max-width: 868px) {
+@media (max-width: 1000px) {
   .icon {
     display: block;
   }
@@ -233,7 +234,7 @@ header {
     padding: 40px 0;
     text-align: center;
     background: #214254;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease-in-out;
     box-shadow: 5px 0px 10px 0px rgba(0, 0, 0, 0.3);
   }
   .navbar.show .menu-list {
@@ -245,9 +246,10 @@ header {
     margin-right: 20px;
   }
   .navbar .menu-list li a {
-    font-size: 23px;
+    font-size: 24px;
     margin-left: -100%;
-    transition: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    /* cubic-bezier generated with https://matthewlein.com/tools/ceaser */
+    transition: all 600ms cubic-bezier(0.9, -0.3, 0.4, 1.5);
   }
   .navbar.show .menu-list li a {
     margin-left: 0;
@@ -338,7 +340,7 @@ header {
 }
 
 /*----------------------
- 	  Brandbergmassiv
+ 	      About
 ----------------------*/
 
 .about {
@@ -386,7 +388,7 @@ header {
 }
 
 /*--------------------
- 	    Überblick
+ 	    Overview
 ---------------------*/
 
 .gallerie {
@@ -480,7 +482,7 @@ footer p a {
 }
 
 /*--------------------------------------------------------------------------------------------
-                                          DATENBANK
+                                          DATABASE
 --------------------------------------------------------------------------------------------*/
 
 /*-------------
