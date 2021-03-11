@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -24,16 +24,15 @@
 </head>
 
 <body onload="loadDoc()">
-
     <nav class="navbar">
         <div class="content">
             <div class="logo">
                 <a href="index.html">Brandberg</a>
             </div>
             <ul class="menu-list">
-                <div class="icon cancel-btn">
+                <li class="icon cancel-btn">
                     <i class="fas fa-times"></i>
-                </div>
+                </li>
                 <li><a href="index.html#brandbergmassiv">Brandberg</a></li>
                 <li><a href="index.html#overview">Overview</a></li>
                 <li><a href="index.html#name">Name</a></li>
@@ -49,8 +48,8 @@
     <section class="banner banner-small row">
         <div class="background-image" style="background-image: url(images/home/Eingang_Hungorob-Schlucht.JPG);">
         </div>
-        <h1>Database</h1>
-        <h2>Brandberg</h2>
+        <h2>Database</h2>
+        <h3>Brandberg</h3>
     </section>
 
     <div class="filter-container">
@@ -121,7 +120,7 @@
         <div id="resultsCountDIV"></div>
         <div id="outputDIV"></div>
         <div id="guideDIV">
-            <article class="header-section">
+            <div class="header-section">
                 <h1>Structure and Meaning of the Database</h1>
                 <h2>The Database of Sites</h2>
                 <p>This database comprises data compiled according
@@ -130,8 +129,8 @@
                     social contexts. Among the latter are the facilities
                     for group activities or the kind of 'living quality'
                     the site offers.</p>
-            </article>
-            <article class="p-coll">
+            </div>
+            <div class="p-coll">
                 <p><b>SITE:</b> Lists the site codes in the order used in the publications (PAGER 1989–2006).</p>
                 <p><b>SITE NICKNAME:</b> Some of the most prominent sites have commonly used names. These "nicknames"
                     can be derived from unique paintings.</p>
@@ -145,8 +144,7 @@
                     which parts of the 'architecture' of the sites were used for painting [ill. 1]. For example, the
                     vast majority of paintings is painted on the ceiling (painting location No. 5) while only very few
                     are painted on the left flank of the entrance (painting location No. 9).</p>
-                <img src="images/database/BrandbergDaurebDatabaseonRockArt.jpg" alt="ill. 1: Painting Location"
-                    width="400px">
+                <img id="pic1" src="images/database/BrandbergDaurebDatabaseonRockArt.jpg" alt="ill. 1: Painting Location">
                 <p><b>OPEN FIELD:</b> Marks the presence of an open level plain of at least 10 x 10 m, permitting the
                     performance of social activities that require such space, e.g. dancing or playing. Addtional
                     information has been recorded on the visibility of a given open field from the site (OPEN FIELD IN
@@ -163,8 +161,8 @@
                     categories.</p>
                 <p><b>EVIDENCE OF HUMAN OCCUPATION:</b> Gives information about earlier visitors, derived from artefacts
                     to be found at the site.</p>
-            </article>
-            <article class="p-coll">
+            </div>
+            <div class="p-coll">
                 <p><b>GORGE:</b> The complete names of the corresponding gorge.</p>
                 <p><b>DISCOVERER:</b> Lists the person who is known to be the first visitor in recent times.</p>
                 <p><b>PUBLICATION:</b> Specific volume referring to the site (PAGER 1989–2006).</p>
@@ -185,9 +183,8 @@
                     to stand upright under the roof. An “unfavourable” shelter is a place with an uneven, inclined floor
                     and/or a place where standing up inside is impossible. “±vertical rock” is a boulder which has no
                     overhang that could shelter a person.</p>
-                <img src="images/database/BrandbergDaurebDatabaseonRockArt2.jpg" alt="ill. 2: Living Place"
-                    width="200px">
-            </article>
+                <img id="pic2" src="images/database/BrandbergDaurebDatabaseonRockArt2.jpg" alt="ill. 2: Living Place">
+            </div>
         </div>
     </div>
 
@@ -205,7 +202,6 @@
     <!-- Script -->
     <script src="scripts/database.js" defer></script>
     <!-- Script END -->
-
 </body>
 
 </html>
