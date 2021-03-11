@@ -223,6 +223,9 @@ header {
   .icon.hide {
     display: none;
   }
+  .content {
+    padding: 0 30px;
+  }
   .navbar .menu-list {
     position: fixed;
     height: 100vh;
