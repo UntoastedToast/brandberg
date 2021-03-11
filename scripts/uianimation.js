@@ -30,16 +30,24 @@
   var body = document.querySelector("body");
   var navbar = document.querySelector(".navbar");
   var menuBtn = document.querySelector(".menu-btn");
-  var cancelBtn = document.querySelector(".cancel-btn");
+  var closeBtn = document.querySelector(".cancel-btn");
+  var closeMenu = document.querySelector(".menu-list");
   var logo = document.querySelector(".logo");
   var menuli = document.querySelector(".menu-list")
+
+  // Hide menu when clicking on a li element
+  closeMenu.onclick = () => {
+    body.classList.remove("disabled");
+    navbar.classList.remove("show");
+    menuBtn.classList.remove("hide");
+  }
 
   menuBtn.onclick = () => {
     navbar.classList.add("show");
     menuBtn.classList.add("hide");
     body.classList.add("disabled");
   }
-  cancelBtn.onclick = () => {
+  closeBtn.onclick = () => {
     body.classList.remove("disabled");
     navbar.classList.remove("show");
     menuBtn.classList.remove("hide");
