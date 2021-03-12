@@ -41,20 +41,16 @@
         /* The values of the selected select boxes are passed to a respective variable */
 
         // Gorge
-        var gorgeSelect = document.getElementById("gorgeSelect");
-        gorgeSelect = gorgeSelect.options[gorgeSelect.selectedIndex].value;
+        var gorgeSelect = document.getElementById("gorgeSelect").value;
 
         // Water Availability
-        var waterSelect = document.getElementById("waterSelect");
-        waterSelect = waterSelect.options[waterSelect.selectedIndex].value;
+        var waterSelect = document.getElementById("waterSelect").value;
 
         // Open Field
-        var openfieldSelect = document.getElementById("openfieldSelect");
-        openfieldSelect = openfieldSelect.options[openfieldSelect.selectedIndex].value;
+        var openfieldSelect = document.getElementById("openfieldSelect").value;
 
         // Figure Category
-        var figurecategorySelect = document.getElementById("figurecategorySelect");
-        figurecategorySelect = figurecategorySelect.options[figurecategorySelect.selectedIndex].value;
+        var figurecategorySelect = document.getElementById("figurecategorySelect").value;
 
         /*  In this case, the filter() method was used, which creates a new array.
             https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
