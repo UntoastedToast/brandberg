@@ -24,7 +24,6 @@ a {
   text-decoration: none;
   color: inherit;
   cursor: pointer;
-
   opacity: 0.9;
 }
 
@@ -35,21 +34,20 @@ a:hover {
 a.btn {
   color: #fff;
   border-radius: 4px;
-  text-transform: uppercase;
   background-color: #00445a;
   font-weight: 400;
   text-align: center;
 }
 
 hr {
-  width: 150px;
+  width: 200px;
   height: 2px;
   background-color: #00445a;
   border: 0;
   margin-bottom: 80px;
 }
 
-.row {
+.flex-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -58,47 +56,46 @@ hr {
 }
 
 @media (max-width: 1000px) {
-  .row {
+  .flex-container {
     padding: 100px 50px;
   }
 }
 
 @media (max-width: 600px) {
-  .row {
+  .flex-container {
     padding: 80px 30px;
   }
 }
 
-.row h3.title {
+.flex-container h3.title {
   color: #414a4f;
-  text-transform: capitalize;
   font: bold 32px;
   margin-bottom: 35px;
   text-align: center;
 }
 
-.row p {
+.flex-container p {
   max-width: 800px;
   text-align: justify;
   margin-bottom: 35px;
   padding: 0 20px;
-  line-height: 2;
+  line-height: 1.8;
 }
 
 ul.grid {
   width: 100%;
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 /*--------------------------------------------------------------------------------------------
                                           HOME
 --------------------------------------------------------------------------------------------*/
 
-/*-------------
- 	  Header
--------------*/
+/*--------------------
+ 	      Header
+--------------------*/
 
 header {
   position: absolute;
@@ -129,13 +126,13 @@ header {
   }
 }
 
-/*----------------
-      Navbar
-----------------*/
+/*--------------------
+ 	      Navbar
+--------------------*/
 
-.content {
+.nav-content {
   max-width: 1600px;
-  margin: auto;
+  margin: 0 auto;
   padding: 0 80px;
 }
 
@@ -152,7 +149,7 @@ header {
   box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.2);
 }
 
-.navbar .content {
+.navbar .nav-content {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -222,7 +219,7 @@ header {
   .icon.hide {
     display: none;
   }
-  .content {
+  .nav-content {
     padding: 5px 30px;
   }
   .navbar .menu-list {
@@ -263,9 +260,9 @@ header {
   }
 }
 
-/*----------------
-      Banner
-----------------*/
+/*--------------------
+ 	      Banner
+--------------------*/
 
 .banner {
   position: relative;
@@ -276,7 +273,7 @@ header {
 }
 
 .banner-small {
-  min-height: 50vh !important;
+  min-height: 50vh;
 }
 
 .banner-small h2 {
@@ -305,8 +302,8 @@ header {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #4e5b5f;
-  opacity: 0.65;
+  background-color: #374750;
+  opacity: 0.6;
 }
 
 .banner h1 {
@@ -393,32 +390,31 @@ header {
  	    Overview
 ---------------------*/
 
-.gallerie {
+.gallery {
   background-color: #f7f7f7;
 }
 
-.gallerie .grid li {
+.gallery .grid li {
   padding: 20px;
-  height: 450px;
-  border-radius: 3px;
+  height: 400px;
 
   background-clip: content-box;
   background-size: cover;
   background-position: center;
-  background-color: #333;
+  background-color: #1B4256;
 }
 
-.gallerie .grid li.small {
+.gallery .grid li.small {
   flex-basis: 40%;
 }
 
-.gallerie .grid li.large {
+.gallery .grid li.large {
   flex-basis: 60%;
 }
 
 @media (max-width: 1000px) {
-  .gallerie .grid li.small,
-  .gallerie .grid li.large {
+  .gallery .grid li.small,
+  .gallery .grid li.large {
     flex-basis: 100%;
   }
 }
@@ -427,13 +423,12 @@ header {
  	      Name
 --------------------*/
 
-.name {
-  background-color: #fff;
-}
+/* Nothing to style */
 
-/*-------------
- 	Imagemap
--------------*/
+
+/*--------------------
+ 	    Image Map
+--------------------*/
 
 .imagemap {
   justify-content: center;
@@ -453,9 +448,9 @@ header {
   overflow: hidden;
 }
 
-/*-------------
- 	  Footer
--------------*/
+/*--------------------
+ 	     Footer
+--------------------*/
 
 footer {
   display: flex;
@@ -464,20 +459,20 @@ footer {
   text-align: center;
   color: #fff;
   background-color: #124358;
-  padding: 60px 0;
+  padding: 50px 0;
 }
 
 footer p {
   font-size: 14px;
   color: rgba(255, 255, 255, 0.6);
-  margin-bottom: 10px;
+  line-height: 1.7rem;
 }
 
 footer p a {
   color: #fff;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 800px) {
   footer {
     padding: 80px 15px;
   }
@@ -584,7 +579,6 @@ footer p a {
 
 #resultsCountDIV p {
   padding: 20px;
-  margin-bottom: 50px;
   background-color: #3f7ea1;
 }
 
@@ -761,6 +755,55 @@ select::-ms-expand {
 #filter-button {
   width: 100%;
 }
+
+
+/*--------------------------------------
+              Search Box
+-------------------------------------- */
+
+.search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 960px;
+    margin: 0 auto;
+  
+    padding: 50px 0 30px;
+}
+
+.search-container p {
+  width: 40%;
+  color: #9b9ea0;
+  text-align: center;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.search-container #searchBox {
+  width: 80%;
+  padding: 20px;
+  border-radius: 5px;
+  border: solid 2px rgba(33, 66, 84, 0.15);
+  background-color: #fff;
+  transition: 0.2s ease-in-out;
+}
+
+.search-container #searchBox:hover {
+  border: solid 2px #fff;
+  box-shadow: 0px 0px 10px 0px rgba(33, 66, 84, 0.4);
+}
+
+.search-container #searchBox:focus {
+  outline: none;
+  border: solid 2px #fff;
+  box-shadow: 0px 0px 10px 0px rgba(33, 66, 84, 0.4);
+}
+
+.hidden {
+  display: none;
+}
+
+
 
 /*--------------------------------------
           Scroll To Top Button

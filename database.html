@@ -19,13 +19,13 @@
     <!-- CSS END -->
 
     <!-- Script -->
-    <script src="scripts/uianimation.js" defer></script>
+    <script src="scripts/ui.js" defer></script>
     <!-- Script END -->
 </head>
 
 <body onload="loadDoc()">
     <nav class="navbar">
-        <div class="content">
+        <div class="nav-content">
             <div class="logo">
                 <a href="index.html">Brandberg</a>
             </div>
@@ -45,7 +45,7 @@
         </div>
     </nav>
 
-    <section class="banner banner-small row">
+    <section class="banner banner-small flex-container">
         <div class="background-image" style="background-image: url(images/home/Eingang_Hungorob-Schlucht.JPG);">
         </div>
         <h2>Database</h2>
@@ -118,7 +118,14 @@
 
     <div class="output-section">
         <div id="resultsCountDIV"></div>
+
+        <div class="search-container hidden">
+            <p>Here you can additionally search for the gorges, sites, discoverers and publications.</p>
+            <input type="search" name="searchBox" id="searchBox" placeholder="Search...">
+        </div>
+        
         <div id="outputDIV"></div>
+
         <div id="guideDIV">
             <div class="header-section">
                 <h1>Structure and Meaning of the Database</h1>

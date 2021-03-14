@@ -8,13 +8,13 @@
 
 // Variables defined globally
     var tableSites;
-    var filteredData;
+    var filteredData = [];
     var section;
     var buttonArray = [];
     var contentArray = [];
 
 
-// Function to inject the JSON file
+// Function to load the JSON file
     function loadDoc() {
         var request = new XMLHttpRequest();
         request.responseType = 'json';
@@ -22,17 +22,23 @@
         request.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 doc = request.response;
-                console.log(doc);
+                console.log("The JSON file has been loaded: " + doc);
                 tableSites = doc.TableOfSites.Coll;
-                console.log(tableSites);
-
+                console.log("The array from the JSON file has been loaded: " + tableSites);
             }
-        };
+        };  
 
         request.open("GET", "data/TableOfSitesKoordinaten.json", true);
         request.send();
     }
 
+
+
+// Event Listener for filterBtn
+    document.getElementById("filterBtn").addEventListener("click", s => {
+        filterData(tableSites);
+        document.querySelector(".search-container").classList.remove("hidden");
+    }); 
 
 // Function to filter the JSON file "TableOfSitesKoordinaten"
 
@@ -41,17 +47,18 @@
         /* The values of the selected select boxes are passed to a respective variable */
 
         // Gorge
-        var gorgeSelect = document.getElementById("gorgeSelect").value;
+            var gorgeSelect = document.getElementById("gorgeSelect").value;
 
         // Water Availability
-        var waterSelect = document.getElementById("waterSelect").value;
+            var waterSelect = document.getElementById("waterSelect").value;
 
         // Open Field
-        var openfieldSelect = document.getElementById("openfieldSelect").value;
+            var openfieldSelect = document.getElementById("openfieldSelect").value;
 
         // Figure Category
-        var figurecategorySelect = document.getElementById("figurecategorySelect").value;
+            var figurecategorySelect = document.getElementById("figurecategorySelect").value;
 
+            
         /*  In this case, the filter() method was used, which creates a new array.
             https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
 
@@ -64,26 +71,45 @@
             !variable || (variable === variable) evaluates to the first truthy operand.
             (a) && (b) evaluates to the first falsy operand */
 
-        var filteredData = tableSites.filter((s) => {
-            return  (!gorgeSelect || s.Gorge === gorgeSelect) &&
-                    (!waterSelect || s.WaterAvailability === waterSelect) &&
-                    (!openfieldSelect || s.OpenField === openfieldSelect) &&
-                    (!figurecategorySelect || s.FigureCategory === figurecategorySelect);
+            var filteredData = tableSites.filter((s) => {
+                return  (!gorgeSelect || s.Gorge === gorgeSelect) &&
+                        (!waterSelect || s.WaterAvailability === waterSelect) &&
+                        (!openfieldSelect || s.OpenField === openfieldSelect) &&
+                        (!figurecategorySelect || s.FigureCategory === figurecategorySelect);
+            });
+
+            console.log(filteredData);
+            hideGuide();
+            output(filteredData);
+
+            return filteredData;
+            // searchData(tableSites);
+    }
+
+
+    // Function that hides the guideDIV
+        function hideGuide() {
+            document.getElementById("guideDIV").style.display = "none";
+        }
+    
+
+// Function for search box
+    document.getElementById("searchBox").addEventListener("keyup", (s) => {
+        var searchString = s.target.value.toLowerCase();
+
+        console.log("Entered characters in search field: " + searchString);
+
+        filteredData = tableSites.filter( search => {
+            return  search.Gorge.toLowerCase().includes(searchString) ||
+                    search.Site.toLowerCase().includes(searchString) ||
+                    search.Publication.toLowerCase().includes(searchString) ||
+                    search.Discoverer.toLowerCase().includes(searchString);
         });
+
         console.log(filteredData);
         output(filteredData);
-    }
+    });
 
-    // Event Listener for filterBtn
-        document.getElementById("filterBtn").addEventListener("click", s => {
-            filterData(tableSites); hideGuide();
-        });
-
-
-// Function that hides the guideDIV
-    function hideGuide() {
-        document.getElementById("guideDIV").style.display = "none";
-    }
 
 
 // Function for outputting the results of filtering
