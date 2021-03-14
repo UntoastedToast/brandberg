@@ -525,8 +525,7 @@ footer p a {
 }
 
 .resultsSection:hover {
-  background-color: #173a4b;
-  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.6);
   transition: 0.4s;
 }
 
@@ -772,7 +771,7 @@ select::-ms-expand {
 }
 
 .search-container p {
-  width: 40%;
+  width: 60%;
   color: #9b9ea0;
   text-align: center;
   line-height: 1.8;

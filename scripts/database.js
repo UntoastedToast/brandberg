@@ -8,6 +8,7 @@
 
 // Variables defined globally
     var tableSites;
+    var arrayForSearch;
     var filteredData = [];
     var section;
     var buttonArray = [];
@@ -71,45 +72,47 @@
             !variable || (variable === variable) evaluates to the first truthy operand.
             (a) && (b) evaluates to the first falsy operand */
 
-            var filteredData = tableSites.filter((s) => {
-                return  (!gorgeSelect || s.Gorge === gorgeSelect) &&
-                        (!waterSelect || s.WaterAvailability === waterSelect) &&
-                        (!openfieldSelect || s.OpenField === openfieldSelect) &&
-                        (!figurecategorySelect || s.FigureCategory === figurecategorySelect);
+            // Select Boxes Filter
+            var filteredData = tableSites.filter((select) => {
+                return  (!gorgeSelect || select.Gorge === gorgeSelect) &&
+                        (!waterSelect || select.WaterAvailability === waterSelect) &&
+                        (!openfieldSelect || select.OpenField === openfieldSelect) &&
+                        (!figurecategorySelect || select.FigureCategory === figurecategorySelect);
             });
 
             console.log(filteredData);
             hideGuide();
             output(filteredData);
 
-            return filteredData;
-            // searchData(tableSites);
+            // Var (Array) for search box
+            var arrayForSearch = filteredData;
+
+            // Search Box Filter
+            document.getElementById("searchBox").addEventListener("keyup", (search) => {
+
+                var searchString = search.target.value.toLowerCase();
+        
+                console.log("Entered characters in search field: " + searchString);
+        
+                var filteredData = arrayForSearch.filter((search) => {
+                    return  search.Gorge.toLowerCase().includes(searchString) ||
+                            search.Site.toLowerCase().includes(searchString) ||
+                            search.ID.toLowerCase().includes(searchString) ||
+                            search.Publication.toLowerCase().includes(searchString) ||
+                            search.Discoverer.toLowerCase().includes(searchString);
+                });
+        
+                console.log(filteredData);
+                output(filteredData);
+            });
     }
 
 
-    // Function that hides the guideDIV
-        function hideGuide() {
-            document.getElementById("guideDIV").style.display = "none";
-        }
+// Function that hides the guideDIV
+    function hideGuide() {
+        document.getElementById("guideDIV").style.display = "none";
+    }
     
-
-// Function for search box
-    document.getElementById("searchBox").addEventListener("keyup", (s) => {
-        var searchString = s.target.value.toLowerCase();
-
-        console.log("Entered characters in search field: " + searchString);
-
-        filteredData = tableSites.filter( search => {
-            return  search.Gorge.toLowerCase().includes(searchString) ||
-                    search.Site.toLowerCase().includes(searchString) ||
-                    search.Publication.toLowerCase().includes(searchString) ||
-                    search.Discoverer.toLowerCase().includes(searchString);
-        });
-
-        console.log(filteredData);
-        output(filteredData);
-    });
-
 
 
 // Function for outputting the results of filtering
