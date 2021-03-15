@@ -15,6 +15,15 @@
     var contentArray = [];
 
 
+// EventListener that executes the loadDoc() function
+// https://developer.mozilla.org/de/docs/Web/API/Window/DOMContentLoaded_event
+
+    document.addEventListener("DOMContentLoaded", function(e) {
+        console.log("DOM fully loaded and parsed");
+        loadDoc();
+      });
+
+
 // Function to load the JSON file
     function loadDoc() {
         var request = new XMLHttpRequest();
@@ -36,8 +45,14 @@
 
 
 // Event Listener for filterBtn
-    document.getElementById("filterBtn").addEventListener("click", s => {
+    document.getElementById("filterBtn").addEventListener("click", (e) => {
+        // Clear value from search box
+        document.getElementById("searchBox").value = "";
+
+        // Executes filterData() function
         filterData(tableSites);
+
+        // Show the search box
         document.querySelector(".search-container").classList.remove("hidden");
     }); 
 
@@ -73,11 +88,11 @@
             (a) && (b) evaluates to the first falsy operand */
 
             // Select Boxes Filter
-            var filteredData = tableSites.filter((select) => {
-                return  (!gorgeSelect || select.Gorge === gorgeSelect) &&
-                        (!waterSelect || select.WaterAvailability === waterSelect) &&
-                        (!openfieldSelect || select.OpenField === openfieldSelect) &&
-                        (!figurecategorySelect || select.FigureCategory === figurecategorySelect);
+            var filteredData = tableSites.filter((e) => {
+                return  (!gorgeSelect || e.Gorge === gorgeSelect) &&
+                        (!waterSelect || e.WaterAvailability === waterSelect) &&
+                        (!openfieldSelect || e.OpenField === openfieldSelect) &&
+                        (!figurecategorySelect || e.FigureCategory === figurecategorySelect);
             });
 
             console.log(filteredData);
@@ -87,31 +102,30 @@
             // Var (Array) for search box
             var arrayForSearch = filteredData;
 
+            // Clear filteredData
+            filteredData = [];
+            console.log("filteredData was cleared: " + filteredData)
+
             // Search Box Filter
-            document.getElementById("searchBox").addEventListener("keyup", (search) => {
+            document.getElementById("searchBox").addEventListener("keyup", (e) => {
 
                 // The value is converted to lowercase (with toLowerCase();) for no case sensitive search
-                var searchString = search.target.value.toLowerCase();
+                var searchString = e.target.value.toLowerCase();
         
                 console.log("Entered characters in search field: " + searchString);
         
-                var filteredData = arrayForSearch.filter((search) => {
-                    return  search.Gorge.toLowerCase().includes(searchString) ||
-                            search.Site.toLowerCase().includes(searchString) ||
-                            search.ID.toLowerCase().includes(searchString) ||
-                            search.Publication.toLowerCase().includes(searchString) ||
-                            search.Discoverer.toLowerCase().includes(searchString);
+                var filteredData = arrayForSearch.filter((e) => {
+                    return  e.Gorge.toLowerCase().includes(searchString) ||
+                            e.Site.toLowerCase().includes(searchString) ||
+                            e.ID.toLowerCase().includes(searchString) ||
+                            e.Publication.toLowerCase().includes(searchString) ||
+                            e.Discoverer.toLowerCase().includes(searchString);
                 });
         
                 console.log("filteredData: " + filteredData);
 
                 // Pass filteredData to output() function
                 output(filteredData);
-
-                // Clear filteredData
-                filteredData = [];
-                console.log("filteredData was cleared: " + filteredData)
- 
             });
     }
 
@@ -303,7 +317,9 @@ function output(filteredData) {
             // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push
                 buttonArray.push(btnToggleContent);
                 contentArray.push(nonvisibleElement);
-    }
+    
+    } // for-loop END
+    
 
     // The hit count of the search
         document.getElementById("resultsCountDIV").innerHTML = "<p>Your search returned " + "<b>" + resultsCount + "</b>" + " results.</p>";
@@ -315,7 +331,7 @@ function output(filteredData) {
             }.bind (this, iButton));
         }
 
-}
+} // Output() Function END
 
 // Function to show "nonvisibleElement"
     function toggleContent(iCurrentButton, currentButton) {
@@ -323,7 +339,6 @@ function output(filteredData) {
         // The counter of the "contentArray" is compared with the current "iButton"
         for (let iArray = 0; iArray < contentArray.length; iArray++) {
             if (iArray === iCurrentButton) {
-                
                 if (contentArray[iArray].style.display === "none") {
                     contentArray[iArray].style.display = "block";
                     currentButton.innerHTML = "Show less";
@@ -332,6 +347,5 @@ function output(filteredData) {
                     currentButton.innerHTML = "Show more";
                 }
             }
-            
         }
     }
