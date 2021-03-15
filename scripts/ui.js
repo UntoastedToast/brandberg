@@ -64,3 +64,9 @@
       menuli.classList.remove ("menu-li-sticky");
     }
   }
+
+  // Select Option Function
+    function selectOption(s)
+    {
+      s.style.color = "#333";    
+    }

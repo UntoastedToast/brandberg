@@ -738,13 +738,21 @@ select::-ms-expand {
   padding: 0px 24px;
   font-size: 16px;
   line-height: 1.75;
-  color: #333;
+  color: #999;
   background-color: #ffffff;
   background-image: none;
   border: 1px solid #cccccc;
   -ms-word-break: normal;
   word-break: normal;
   border-radius: 4px;
+}
+
+.selectdiv select option:first-child {
+  color: #999;
+}
+
+.selectdiv option {
+  color: #333;
 }
 
 @media (max-width: 1000px) {
