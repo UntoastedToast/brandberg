@@ -52,6 +52,9 @@
         // Executes filterData() function
         filterData(tableSites);
 
+        // Hide Guide DIV
+        document.getElementById("guideDIV").style.display = "none";
+
         // Show the search box
         document.querySelector(".search-container").classList.remove("hidden");
     }); 
@@ -88,7 +91,7 @@
             (a) && (b) evaluates to the first falsy operand */
 
             // Select Boxes Filter
-            var filteredData = tableSites.filter((e) => {
+            filteredData = tableSites.filter((e) => {
                 return  (!gorgeSelect || e.Gorge === gorgeSelect) &&
                         (!waterSelect || e.WaterAvailability === waterSelect) &&
                         (!openfieldSelect || e.OpenField === openfieldSelect) &&
@@ -96,7 +99,6 @@
             });
 
             console.log(filteredData);
-            hideGuide();
             output(filteredData);
 
             // Var (Array) for search box
@@ -109,32 +111,33 @@
             // Search Box Filter
             document.getElementById("searchBox").addEventListener("keyup", (e) => {
 
-                // The value is converted to lowercase (with toLowerCase();) for no case sensitive search
+                // The value is converted to lowercase (with toLowerCase();) for non-case sensitive search
                 var searchString = e.target.value.toLowerCase();
         
                 console.log("Entered characters in search field: " + searchString);
         
-                var filteredData = arrayForSearch.filter((e) => {
-                    return  e.Gorge.toLowerCase().includes(searchString) ||
-                            e.Site.toLowerCase().includes(searchString) ||
-                            e.ID.toLowerCase().includes(searchString) ||
-                            e.Publication.toLowerCase().includes(searchString) ||
-                            e.Discoverer.toLowerCase().includes(searchString);
+                filteredData = arrayForSearch.filter((e) => {
+                    return  (e.Gorge.toLowerCase().includes(searchString)) ||
+                            (e.Site.toLowerCase().includes(searchString)) ||
+                            (e.ID.toLowerCase().includes(searchString)) ||
+                            (e.Publication.toLowerCase().includes(searchString)) ||
+                            (e.Discoverer.toLowerCase().includes(searchString));
                 });
         
                 console.log("filteredData: " + filteredData);
 
                 // Pass filteredData to output() function
                 output(filteredData);
+
+                
+
+                // Clear filteredData
+                filteredData = [];
+                console.log("filteredData was cleared: " + filteredData)
+                
             });
     }
 
-
-// Function that hides the guideDIV
-    function hideGuide() {
-        document.getElementById("guideDIV").style.display = "none";
-    }
-    
 
 
 // Function for outputting the results of filtering
@@ -149,8 +152,11 @@ function output(filteredData) {
     // The section is emptied before output
     outputDIV.innerHTML = "";
 
+    // filteredData.length; better performance
+    var filteredArray = filteredData.length
+
     // The results of the filter function (the array) is entered into a for-loop
-    for (let i = 0; i < filteredData.length; i++) {
+    for (let i = 0; i < filteredArray; i++) {
 
         // The number of hits in the search results is increased by +1
         resultsCount = resultsCount + 1;

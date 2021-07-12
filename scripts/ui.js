@@ -65,8 +65,8 @@
     }
   }
 
-  // Select Option Function
-    function selectOption(s)
-    {
-      s.style.color = "#333";    
-    }
+// Select Option Function
+  function selectOption(s)
+  {
+    s.style.color = "#333";    
+  }
