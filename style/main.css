@@ -276,7 +276,6 @@ header {
   }
 }
 
-
 /*--------------------------------------
                 Banner
 -------------------------------------- */
@@ -706,6 +705,10 @@ h2 {
   position: relative;
 }
 
+.selectdiv-large {
+  width: 100% !important;
+}
+
 /* IE11 hide native button */
 select::-ms-expand {
   display: none;
@@ -760,6 +763,11 @@ select::-ms-expand {
   .selectdiv {
     width: 100%;
   }
+}
+
+#gorgeSelect option:disabled {
+  color: #999;
+  background-color: #eeeeee;
 }
 
 /* ---------- Filter Button ---------- */
@@ -864,7 +872,7 @@ select::-ms-expand {
   position: fixed;
   bottom: 20px;
   right: 30px;
-  z-index: 97;
+  z-index: 9999;
   border: none;
   outline: none;
   background-color: #66afdc;
@@ -875,8 +883,6 @@ select::-ms-expand {
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.3);
 }
 
-
-
 /*--------------------------------------------------------------------------------------------
                                           IMPRINT
 --------------------------------------------------------------------------------------------*/
@@ -886,7 +892,7 @@ select::-ms-expand {
 }
 
 #module {
-  background-color: #F7F7F7;
+  background-color: #f7f7f7;
 }
 
 .new-p {
@@ -898,13 +904,13 @@ select::-ms-expand {
 }
 
 #reference a {
-  color: #1B4256 !important;
+  color: #1b4256 !important;
 }
 
 .imprint-btn {
   margin-top: 10px;
   padding: 10px 0;
-  background-color: #70AED8;
+  background-color: #70aed8;
   border-radius: 5px;
 }
 
@@ -918,13 +924,12 @@ select::-ms-expand {
   opacity: 0.9;
 }
 
-
 /*--------------------------------------------------------------------------------------------
-                                          IMPRINT
+                                          GIS
 --------------------------------------------------------------------------------------------*/
 
 #map-container {
-  background-color: #F7F7F7;
+  background-color: #f7f7f7;
 }
 
 #map {
@@ -947,4 +952,189 @@ select::-ms-expand {
 
 .map-header-section {
   padding: 0 150px;
+}
+
+#brandberg-model {
+  padding-top: 0;
+  padding-bottom: 100px;
+}
+
+/* ---------- 3D Model Button ---------- */
+
+.model-btn {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #58b0e0;
+  border: none;
+  color: #fff;
+  text-align: center;
+  font-size: 18px;
+  height: 60px;
+  width: 100%;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 0;
+}
+
+.model-btn span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+  padding-left: 5px;
+}
+
+.model-btn i {
+  padding-right: 5px;
+}
+
+.model-btn span:after {
+  content: "\00bb";
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.model-btn:hover span {
+  padding-right: 25px;
+}
+
+.model-btn:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+#model-button {
+  max-width: 300px;
+  margin: auto;
+}
+
+/*--------------------------------------------------------------------------------------------
+                                          IMAGES
+--------------------------------------------------------------------------------------------*/
+
+.imageDIV {
+  margin: 25px;
+  max-width: 500px;
+  border-radius: 5px;
+  background: #124358;
+  color: #ffffff;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
+}
+
+.imageDIV img {
+  max-width: 400px;
+  max-height: 400px;
+}
+
+.imageDIV p {
+  text-align: center !important;
+}
+
+/*---------- Image Hover Zoom ----------*/
+
+/* Container */
+.img-hover-zoom {
+  max-height: 400px;
+  overflow: hidden;
+}
+
+/* Transition property for smooth transformation of images */
+.img-hover-zoom img {
+  transition: transform 0.5s ease;
+}
+
+/* Transforming the image when container gets hovered */
+.img-hover-zoom:hover img {
+  transform: scale(1.2);
+}
+
+/*---------- Modal Image ----------*/
+
+/* Style the Image Used to Trigger the Modal */
+#image {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#image:hover {
+  opacity: 0.7;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999999;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(6, 20, 25);
+  background-color: rgba(6, 20, 25, 0.95);
+}
+
+/* Modal Content (Image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+/* Caption of Modal Image */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 15px 0;
+}
+
+/* Zoom in the Modal */
+.modal-content,
+#caption {
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px) {
+  .modal-content {
+    width: 100%;
+  }
 }

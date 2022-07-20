@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Brandberg</title>
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#1b4256">
+    <link rel="shortcut icon" href="favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#66afdc">
+    <meta name="msapplication-config" content="favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Favicon END -->
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="style/fonts.css">
+    <link rel="stylesheet" href="style/all.css">
+    <!-- Fonts END -->
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style/main.css">
+    <!-- CSS END -->
+
+    <!-- Script -->
+    <script src="scripts/ui.js" defer></script>
+    <!-- Script END -->
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">
+                <a href="index.html">Brandberg</a>
+            </div>
+            <ul class="menu-list">
+                <li class="icon cancel-btn">
+                    <i class="fas fa-times"></i>
+                </li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="database.html">Database</a></li>
+                <li><a href="images.html">Images</a></li>
+                <li><a href="gis.html">GIS</a></li>
+            </ul>
+            <div class="icon menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <section class="banner banner-small flex-container">
+        <div class="background-image" style="background-image: url(images/images/Brandberg_Mountain_Panorama.jpg);">
+        </div>
+        <h2>Images</h2>
+        <h3>Brandberg</h3>
+    </section>
+
+    <div class="filter-container">
+        <div class="filter-section">
+            <div class="selectdiv selectdiv-large">
+                <select name="gorgeSelect" id="gorgeSelect">
+                    <option value="">Gorges</option>
+                    <option value="A">Amis</option>
+                    <option value="S" disabled>Sesaub / Basswaldrinne</option>
+                    <option value="C">Circus</option>
+                    <option value="D">Dom</option>
+                    <option value="E">Eros</option>
+                    <option value="F" disabled>Furrow</option>
+                    <option value="G">Ga'aseb</option>
+                    <option value="H">Hungorob</option>
+                    <option value="I">Naib</option>
+                    <option value="K">Karoab</option>
+                    <option value="M" disabled>Märchen</option>
+                    <option value="N">Numas</option>
+                    <option value="O">Orabes</option>
+                    <option value="P" disabled>Porters</option>
+                    <option value="Q" disabled>Quagga</option>
+                    <option value="U">Umuab</option>
+                    <option value="Z">Tsisab</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="filter-section">
+            <div id="filter-button">
+                <button id="filterBtn" class="filter-btn" type="button"><span>Show Images </span></button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="output-section">
+        <div id="guideDIV">
+            <div class="header-section">
+                <h1>Pictures from the Brandberg</h1>
+                <h2>by Harald Pager</h2>
+                <p>On this page you will find the pictures that Harald Pager took of the Brandberg at that time. These
+                    pictures can be displayed according to the gorges.</p>
+            </div>
+        </div>
+
+        <!-- The Modal -->
+        <div id="modal" class="modal">
+
+            <!-- The Close Button -->
+            <span class="close">&times;</span>
+
+            <!-- Modal Content (The Image) -->
+            <img class="modal-content" id="img-modal" src="placeholder" alt="modal-content">
+
+            <!-- Modal Caption (Image Text) -->
+            <div id="caption"></div>
+        </div>
+        <div id="outputDIV"></div>
+    </div>
+
+    <button onclick="scrollToTop()" id="scrollTopButton" class="scrollTopHidden" title="To top">To top</button>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>Website created by
+            <a href="https://www.ilias.uni-koeln.de/ilias/goto_uk_usr_4664908.html" target="_blank">Janik Lierfeld.
+            </a>Images and text were taken from a <a href="https://de.wikipedia.org/wiki/Brandbergmassiv"
+                target="_blank">Wikipedia</a> article.
+        </p>
+        <p>Semester Project: BSI</p>
+        <p>Semester 2020/2021</p>
+        <p class="imprint-btn"><a href="imprint.html"><i class="far fa-file-alt"></i>Imprint</a></p>
+    </footer>
+
+    <!-- Script -->
+    <script src="scripts/imageSearch.js" defer></script>
+    <!-- Script END -->
+</body>
+
+</html>

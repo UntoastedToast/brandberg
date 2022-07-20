@@ -30,6 +30,10 @@
     <link rel="stylesheet" href="style/fontawesome-all.min.css">
     <link rel="stylesheet" href="style/MarkerCluster.css">
     <link rel="stylesheet" href="style/MarkerCluster.Default.css">
+    <!-- GIS CSS -->
+    <link rel="stylesheet" href="style/gis/leaflet.css">
+    <link rel="stylesheet" href="style/gis/qgis2web.css">
+    <link rel="stylesheet" href="style/gis/fontawesome-all.min.css">
     <!-- CSS END -->
 
     <!-- Script -->
@@ -47,11 +51,9 @@
                 <li class="icon cancel-btn">
                     <i class="fas fa-times"></i>
                 </li>
-                <li><a href="index.html#brandbergmassiv">Brandberg</a></li>
-                <li><a href="index.html#overview">Overview</a></li>
-                <li><a href="index.html#name">Name</a></li>
-                <li><a href="index.html#map">Geological Map</a></li>
+                <li><a href="index.html">Home</a></li>
                 <li><a href="database.html">Database</a></li>
+                <li><a href="images.html">Images</a></li>
                 <li><a href="gis.html">GIS</a></li>
             </ul>
             <div class="icon menu-btn">
@@ -61,8 +63,7 @@
     </nav>
 
     <section class="banner banner-small flex-container">
-        <div class="background-image"
-            style="background-image: url(images/home/Landsat-7-image-of-the-Brandberg-Massif.jpg);">
+        <div class="background-image" style="background-image: url(images/gis/brandberg_gis.jpg);">
         </div>
         <h2>Geographic Information System</h2>
     </section>
@@ -76,41 +77,55 @@
         </div>
     </section>
 
-    <section class="flex-container" id="map-container">
-        <div id="map"></div>
-    </section>
-    <script src="scripts/qgis2web_expressions.js"></script>
-    <script src="scripts/leaflet.js"></script>
-    <script src="scripts/multi-style-layer.js"></script>
-    <script src="scripts/leaflet.rotatedMarker.js"></script>
-    <script src="scripts/leaflet.pattern.js"></script>
-    <script src="scripts/leaflet-hash.js"></script>
-    <script src="scripts/Autolinker.min.js"></script>
-    <script src="scripts/rbush.min.js"></script>
-    <script src="scripts/labelgun.min.js"></script>
-    <script src="scripts/labels.js"></script>
-    <script src="scripts/leaflet.markercluster.js"></script>
-    <script src="data/Wasser_5.js"></script>
-    <script src="data/water_distance_lines_1000_6.js"></script>
-    <script src="data/water_to_points_7.js"></script>
-    <script src="data/SchluchtenPolygon_8.js"></script>
-    <script src="data/Sites_10.js"></script>
-    <script src="data/Figures_11.js"></script>
+    <div id="brandberg-model">
+        <div id="model-button">
+            <button class="model-btn" type="button"
+                onclick="window.open('model/model.html', '3D Model', 'height=600,width=900')"><i
+                    class="fas fa-cube"></i><span>Show 3D Model</span></button>
+        </div>
+    </div>
 
+    <!-- GIS Map -->
+    <div class="flex-container" id="map-container">
+        <div id="map"></div>
+    </div>
+
+    <script src="scripts/gis/qgis2web_expressions.js"></script>
+    <script src="scripts/gis/leaflet.js"></script>
+    <script src="scripts/gis/leaflet-svg-shape-markers.min.js"></script>
+    <script src="scripts/gis/leaflet.rotatedMarker.js"></script>
+    <script src="scripts/gis/leaflet.pattern.js"></script>
+    <script src="scripts/gis/leaflet-hash.js"></script>
+    <script src="scripts/gis/Autolinker.min.js"></script>
+    <script src="scripts/gis/rbush.min.js"></script>
+    <script src="scripts/gis/labelgun.min.js"></script>
+    <script src="scripts/gis/labels.js"></script>
+    <script src="data/gis/HeatmapElevationContourHeight_6.js"></script>
+    <script src="data/gis/Water_7.js"></script>
+    <script src="data/gis/WaterdistanceLines1000m_8.js"></script>
+    <script src="data/gis/WatertoPoints_9.js"></script>
+    <script src="data/gis/GorgesPolygons_10.js"></script>
+    <script src="data/gis/Sites_11.js"></script>
+    <script src="data/gis/FiguresQuantity_12.js"></script>
+    <script src="data/gis/WaterAvailability_13.js"></script>
+    <script src="data/gis/WaterinSight_14.js"></script>
+    <script src="data/gis/LivingPlace_15.js"></script>
+    <script src="data/gis/LivingPlacewithFigureQuantity_16.js"></script>
+    <script src="data/gis/FiguresQuantitywithWaterinSigth_17.js"></script>
     <script>
         var map = L.map('map', {
             zoomControl: true, maxZoom: 28, minZoom: 1
-        }).fitBounds([[-21.374770279106023, 14.226838852910284], [-20.962205436383236, 14.9353358449801]]);
+        }).fitBounds([[-21.23607912258238, 14.409625922305057], [-21.03127911010572, 14.697168864110623]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({ truncate: { length: 30, location: 'smart' } });
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
         }
-        map.createPane('pane_satellite_0');
-        map.getPane('pane_satellite_0').style.zIndex = 400;
-        var layer_satellite_0 = L.tileLayer('https://api.maptiler.com/tiles/satellite/{z}/{x}/{y}.jpg?key=6qnmChoRAvLQAATuBjmB', {
-            pane: 'pane_satellite_0',
+        map.createPane('pane_SatelliteMap_0');
+        map.getPane('pane_SatelliteMap_0').style.zIndex = 400;
+        var layer_SatelliteMap_0 = L.tileLayer('https://api.maptiler.com/tiles/satellite/{z}/{x}/{y}.jpg?key=6qnmChoRAvLQAATuBjmB', {
+            pane: 'pane_SatelliteMap_0',
             opacity: 1.0,
             attribution: '<a href=""><a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a></a>',
             minZoom: 1,
@@ -118,12 +133,12 @@
             minNativeZoom: 0,
             maxNativeZoom: 20
         });
-        layer_satellite_0;
-        map.addLayer(layer_satellite_0);
-        map.createPane('pane_hillshades_3');
-        map.getPane('pane_hillshades_3').style.zIndex = 403;
-        var layer_hillshades_3 = L.tileLayer('https://api.maptiler.com/tiles/hillshades/{z}/{x}/{y}.png?key=6qnmChoRAvLQAATuBjmB', {
-            pane: 'pane_hillshades_3',
+        layer_SatelliteMap_0;
+        map.addLayer(layer_SatelliteMap_0);
+        map.createPane('pane_TopoMap_3');
+        map.getPane('pane_TopoMap_3').style.zIndex = 403;
+        var layer_TopoMap_3 = L.tileLayer('https://api.maptiler.com/tiles/hillshades/{z}/{x}/{y}.png?key=6qnmChoRAvLQAATuBjmB', {
+            pane: 'pane_TopoMap_3',
             opacity: 0.2,
             attribution: '<a href=""><a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a></a>',
             minZoom: 1,
@@ -131,104 +146,141 @@
             minNativeZoom: 0,
             maxNativeZoom: 12
         });
-        layer_hillshades_3;
-        function pop_Wasser_5(feature, layer) {
+        layer_TopoMap_3;
+        map.createPane('pane_HeatmapElevation_5');
+        map.getPane('pane_HeatmapElevation_5').style.zIndex = 405;
+        var img_HeatmapElevation_5 = 'data/HeatmapElevation_5.png';
+        var img_bounds_HeatmapElevation_5 = [[-21.2653813646268, 14.379594403313439], [-20.998959320755738, 14.72407413726803]];
+        var layer_HeatmapElevation_5 = new L.imageOverlay(img_HeatmapElevation_5,
+            img_bounds_HeatmapElevation_5,
+            { pane: 'pane_HeatmapElevation_5' });
+        bounds_group.addLayer(layer_HeatmapElevation_5);
+        function pop_HeatmapElevationContourHeight_6(feature, layer) {
         }
 
-        function style_Wasser_5_0() {
+        function style_HeatmapElevationContourHeight_6_0() {
             return {
-                pane: 'pane_Wasser_5',
+                pane: 'pane_HeatmapElevationContourHeight_6',
                 opacity: 1,
-                color: 'rgba(72,123,182,1.0)',
+                color: 'rgba(150,138,125,1.0)',
                 dashArray: '',
                 lineCap: 'square',
                 lineJoin: 'bevel',
-                weight: 3.0,
+                weight: 1.0,
                 fillOpacity: 0,
                 interactive: false,
             }
         }
-        map.createPane('pane_Wasser_5');
-        map.getPane('pane_Wasser_5').style.zIndex = 405;
-        map.getPane('pane_Wasser_5').style['mix-blend-mode'] = 'normal';
-        var layer_Wasser_5 = new L.geoJson(json_Wasser_5, {
+        map.createPane('pane_HeatmapElevationContourHeight_6');
+        map.getPane('pane_HeatmapElevationContourHeight_6').style.zIndex = 406;
+        map.getPane('pane_HeatmapElevationContourHeight_6').style['mix-blend-mode'] = 'normal';
+        var layer_HeatmapElevationContourHeight_6 = new L.geoJson(json_HeatmapElevationContourHeight_6, {
             attribution: '',
             interactive: false,
-            dataVar: 'json_Wasser_5',
-            layerName: 'layer_Wasser_5',
-            pane: 'pane_Wasser_5',
-            onEachFeature: pop_Wasser_5,
-            style: style_Wasser_5_0,
+            dataVar: 'json_HeatmapElevationContourHeight_6',
+            layerName: 'layer_HeatmapElevationContourHeight_6',
+            pane: 'pane_HeatmapElevationContourHeight_6',
+            onEachFeature: pop_HeatmapElevationContourHeight_6,
+            style: style_HeatmapElevationContourHeight_6_0,
         });
-        bounds_group.addLayer(layer_Wasser_5);
-        function pop_water_distance_lines_1000_6(feature, layer) {
+        bounds_group.addLayer(layer_HeatmapElevationContourHeight_6);
+        function pop_Water_7(feature, layer) {
         }
 
-        function style_water_distance_lines_1000_6_0() {
+        function style_Water_7_0() {
             return {
-                pane: 'pane_water_distance_lines_1000_6',
+                pane: 'pane_Water_7',
+                opacity: 1,
+                color: 'rgba(100,152,210,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Water_7');
+        map.getPane('pane_Water_7').style.zIndex = 407;
+        map.getPane('pane_Water_7').style['mix-blend-mode'] = 'normal';
+        var layer_Water_7 = new L.geoJson(json_Water_7, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Water_7',
+            layerName: 'layer_Water_7',
+            pane: 'pane_Water_7',
+            onEachFeature: pop_Water_7,
+            style: style_Water_7_0,
+        });
+        bounds_group.addLayer(layer_Water_7);
+        function pop_WaterdistanceLines1000m_8(feature, layer) {
+        }
+
+        function style_WaterdistanceLines1000m_8_0() {
+            return {
+                pane: 'pane_WaterdistanceLines1000m_8',
                 opacity: 1,
                 color: 'rgba(247,247,247,1.0)',
                 dashArray: '',
                 lineCap: 'round',
                 lineJoin: 'round',
-                weight: 4.0,
+                weight: 2.0,
                 fillOpacity: 0,
-                interactive: false,
+                interactive: true,
             }
         }
-        map.createPane('pane_water_distance_lines_1000_6');
-        map.getPane('pane_water_distance_lines_1000_6').style.zIndex = 406;
-        map.getPane('pane_water_distance_lines_1000_6').style['mix-blend-mode'] = 'normal';
-        var layer_water_distance_lines_1000_6 = new L.geoJson(json_water_distance_lines_1000_6, {
+        map.createPane('pane_WaterdistanceLines1000m_8');
+        map.getPane('pane_WaterdistanceLines1000m_8').style.zIndex = 408;
+        map.getPane('pane_WaterdistanceLines1000m_8').style['mix-blend-mode'] = 'normal';
+        var layer_WaterdistanceLines1000m_8 = new L.geoJson(json_WaterdistanceLines1000m_8, {
             attribution: '',
-            interactive: false,
-            dataVar: 'json_water_distance_lines_1000_6',
-            layerName: 'layer_water_distance_lines_1000_6',
-            pane: 'pane_water_distance_lines_1000_6',
-            onEachFeature: pop_water_distance_lines_1000_6,
-            style: style_water_distance_lines_1000_6_0,
+            interactive: true,
+            dataVar: 'json_WaterdistanceLines1000m_8',
+            layerName: 'layer_WaterdistanceLines1000m_8',
+            pane: 'pane_WaterdistanceLines1000m_8',
+            onEachFeature: pop_WaterdistanceLines1000m_8,
+            style: style_WaterdistanceLines1000m_8_0,
         });
-        bounds_group.addLayer(layer_water_distance_lines_1000_6);
-        function pop_water_to_points_7(feature, layer) {
+        bounds_group.addLayer(layer_WaterdistanceLines1000m_8);
+        function pop_WatertoPoints_9(feature, layer) {
         }
 
-        function style_water_to_points_7_0() {
+        function style_WatertoPoints_9_0() {
             return {
-                pane: 'pane_water_to_points_7',
-                radius: 16.0,
+                pane: 'pane_WatertoPoints_9',
+                radius: 7.0,
                 opacity: 1,
-                color: 'rgba(50,87,128,1.0)',
+                color: 'rgba(28,50,94,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 3.0,
+                weight: 1.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(72,123,182,1.0)',
-                interactive: false,
+                fillColor: 'rgba(217,230,255,1.0)',
+                interactive: true,
             }
         }
-        map.createPane('pane_water_to_points_7');
-        map.getPane('pane_water_to_points_7').style.zIndex = 407;
-        map.getPane('pane_water_to_points_7').style['mix-blend-mode'] = 'normal';
-        var layer_water_to_points_7 = new L.geoJson(json_water_to_points_7, {
+        map.createPane('pane_WatertoPoints_9');
+        map.getPane('pane_WatertoPoints_9').style.zIndex = 409;
+        map.getPane('pane_WatertoPoints_9').style['mix-blend-mode'] = 'normal';
+        var layer_WatertoPoints_9 = new L.geoJson(json_WatertoPoints_9, {
             attribution: '',
-            interactive: false,
-            dataVar: 'json_water_to_points_7',
-            layerName: 'layer_water_to_points_7',
-            pane: 'pane_water_to_points_7',
-            onEachFeature: pop_water_to_points_7,
+            interactive: true,
+            dataVar: 'json_WatertoPoints_9',
+            layerName: 'layer_WatertoPoints_9',
+            pane: 'pane_WatertoPoints_9',
+            onEachFeature: pop_WatertoPoints_9,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_water_to_points_7_0(feature));
+                return L.circleMarker(latlng, style_WatertoPoints_9_0(feature));
             },
         });
-        bounds_group.addLayer(layer_water_to_points_7);
-        function pop_SchluchtenPolygon_8(feature, layer) {
+        bounds_group.addLayer(layer_WatertoPoints_9);
+        function pop_GorgesPolygons_10(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['AREA_GEO'] !== null ? autolinker.link(feature.properties['AREA_GEO'].toLocaleString()) : '') + '</td>\
@@ -240,1415 +292,1544 @@
             layer.bindPopup(popupContent, { maxHeight: 400 });
         }
 
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#1726cb',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#d49827',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#148cd1',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#e74031',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#5ae3ca',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#dd6a2c',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#1bdb85',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#bc6cdc',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#e0d234',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#9dd55d',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#c930a0',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#90ec6e',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#2b71ea',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#14d514',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#ee3859',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#36def0',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#80dc9a',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#d6ec70',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#d35490',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#7a37cb',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#7157e3',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#f075f0',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#1726cb',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#d49827',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#148cd1',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#e74031',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#5ae3ca',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#dd6a2c',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#1bdb85',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#bc6cdc',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#e0d234',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#9dd55d',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#c930a0',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#90ec6e',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#2b71ea',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#14d514',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#ee3859',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#36def0',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#80dc9a',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#d6ec70',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#d35490',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#7a37cb',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#7157e3',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        var pattern_SchluchtenPolygon_8_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 3.0,
-            color: '#f075f0',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_SchluchtenPolygon_8_0.addTo(map);
-        function style_SchluchtenPolygon_8_0(feature) {
+        function style_GorgesPolygons_10_0(feature) {
             switch (String(feature.properties['Name'])) {
                 case 'Amis':
                     return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        stroke: false,
+                        pane: 'pane_GorgesPolygons_10',
+                        opacity: 1,
+                        color: 'rgba(76,76,76,0.6)',
+                        dashArray: '',
+                        lineCap: 'butt',
+                        lineJoin: 'miter',
+                        weight: 1.0,
+                        fill: true,
                         fillOpacity: 1,
-                        fillPattern: pattern_SchluchtenPolygon_8_0,
+                        fillColor: 'rgba(207,54,20,0.6)',
                         interactive: false,
                     }
                     break;
                 case 'Circus':
                     return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        stroke: false,
+                        pane: 'pane_GorgesPolygons_10',
+                        opacity: 1,
+                        color: 'rgba(76,76,76,0.6)',
+                        dashArray: '',
+                        lineCap: 'butt',
+                        lineJoin: 'miter',
+                        weight: 1.0,
+                        fill: true,
                         fillOpacity: 1,
-                        fillPattern: pattern_SchluchtenPolygon_8_0,
+                        fillColor: 'rgba(92,117,228,0.6)',
                         interactive: false,
                     }
                     break;
                 case 'Dom':
                     return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        stroke: false,
+                        pane: 'pane_GorgesPolygons_10',
+                        opacity: 1,
+                        color: 'rgba(76,76,76,0.6)',
+                        dashArray: '',
+                        lineCap: 'butt',
+                        lineJoin: 'miter',
+                        weight: 1.0,
+                        fill: true,
                         fillOpacity: 1,
-                        fillPattern: pattern_SchluchtenPolygon_8_0,
+                        fillColor: 'rgba(80,225,182,0.6)',
                         interactive: false,
                     }
                     break;
                 case 'Eros':
                     return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        stroke: false,
+                        pane: 'pane_GorgesPolygons_10',
+                        opacity: 1,
+                        color: 'rgba(76,76,76,0.6)',
+                        dashArray: '',
+                        lineCap: 'butt',
+                        lineJoin: 'miter',
+                        weight: 1.0,
+                        fill: true,
                         fillOpacity: 1,
-                        fillPattern: pattern_SchluchtenPolygon_8_0,
+                        fillColor: 'rgba(110,211,33,0.6)',
                         interactive: false,
                     }
                     break;
                 case 'Furrow':
                     return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        stroke: false,
+                        pane: 'pane_GorgesPolygons_10',
+                        opacity: 1,
+                        color: 'rgba(76,76,76,0.6)',
+                        dashArray: '',
+                        lineCap: 'butt',
+                        lineJoin: 'miter',
+                        weight: 1.0,
+                        fill: true,
                         fillOpacity: 1,
-                        fillPattern: pattern_SchluchtenPolygon_8_0,
+                        fillColor: 'rgba(229,179,137,0.6)',
                         interactive: false,
                     }
                     break;
                 case 'Ga\'aseb':
                     return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        stroke: false,
+                        pane: 'pane_GorgesPolygons_10',
+                        opacity: 1,
+                        color: 'rgba(76,76,76,0.6)',
+                        dashArray: '',
+                        lineCap: 'butt',
+                        lineJoin: 'miter',
+                        weight: 1.0,
+                        fill: true,
                         fillOpacity: 1,
-                        fillPattern: pattern_SchluchtenPolygon_8_0,
+                        fillColor: 'rgba(44,29,211,0.6)',
                         interactive: false,
                     }
                     break;
                 case 'Hungorob':
                     return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        stroke: false,
+                        pane: 'pane_GorgesPolygons_10',
+                        opacity: 1,
+                        color: 'rgba(76,76,76,0.6)',
+                        dashArray: '',
+                        lineCap: 'butt',
+                        lineJoin: 'miter',
+                        weight: 1.0,
+                        fill: true,
                         fillOpacity: 1,
-                        fillPattern: pattern_SchluchtenPolygon_8_0,
+                        fillColor: 'rgba(116,202,198,0.6)',
                         interactive: false,
                     }
                     break;
                 case 'Karoab':
                     return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        stroke: false,
+                        pane: 'pane_GorgesPolygons_10',
+                        opacity: 1,
+                        color: 'rgba(76,76,76,0.6)',
+                        dashArray: '',
+                        lineCap: 'butt',
+                        lineJoin: 'miter',
+                        weight: 1.0,
+                        fill: true,
                         fillOpacity: 1,
-                        fillPattern: pattern_SchluchtenPolygon_8_0,
+                        fillColor: 'rgba(86,129,209,0.6)',
                         interactive: false,
                     }
                     break;
                 case 'Märchen':
                     return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        stroke: false,
+                        pane: 'pane_GorgesPolygons_10',
+                        opacity: 1,
+                        color: 'rgba(76,76,76,0.6)',
+                        dashArray: '',
+                        lineCap: 'butt',
+                        lineJoin: 'miter',
+                        weight: 1.0,
+                        fill: true,
                         fillOpacity: 1,
-                        fillPattern: pattern_SchluchtenPolygon_8_0,
+                        fillColor: 'rgba(102,205,157,0.6)',
                         interactive: false,
                     }
                     break;
                 case 'Naib':
                     return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        stroke: false,
+                        pane: 'pane_GorgesPolygons_10',
+                        opacity: 1,
+                        color: 'rgba(76,76,76,0.6)',
+                        dashArray: '',
+                        lineCap: 'butt',
+                        lineJoin: 'miter',
+                        weight: 1.0,
+                        fill: true,
                         fillOpacity: 1,
-                        fillPattern: pattern_SchluchtenPolygon_8_0,
+                        fillColor: 'rgba(171,229,89,0.6)',
                         interactive: false,
                     }
                     break;
                 case 'Numas':
                     return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        stroke: false,
+                        pane: 'pane_GorgesPolygons_10',
+                        opacity: 1,
+                        color: 'rgba(76,76,76,0.6)',
+                        dashArray: '',
+                        lineCap: 'butt',
+                        lineJoin: 'miter',
+                        weight: 1.0,
+                        fill: true,
                         fillOpacity: 1,
-                        fillPattern: pattern_SchluchtenPolygon_8_0,
+                        fillColor: 'rgba(225,144,112,0.6)',
                         interactive: false,
                     }
                     break;
                 case 'Nuwuarib':
                     return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        stroke: false,
+                        pane: 'pane_GorgesPolygons_10',
+                        opacity: 1,
+                        color: 'rgba(76,76,76,0.6)',
+                        dashArray: '',
+                        lineCap: 'butt',
+                        lineJoin: 'miter',
+                        weight: 1.0,
+                        fill: true,
                         fillOpacity: 1,
-                        fillPattern: pattern_SchluchtenPolygon_8_0,
+                        fillColor: 'rgba(20,36,212,0.6)',
                         interactive: false,
                     }
                     break;
                 case 'Orabes':
                     return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        stroke: false,
+                        pane: 'pane_GorgesPolygons_10',
+                        opacity: 1,
+                        color: 'rgba(76,76,76,0.6)',
+                        dashArray: '',
+                        lineCap: 'butt',
+                        lineJoin: 'miter',
+                        weight: 1.0,
+                        fill: true,
                         fillOpacity: 1,
-                        fillPattern: pattern_SchluchtenPolygon_8_0,
+                        fillColor: 'rgba(42,207,174,0.6)',
                         interactive: false,
                     }
                     break;
                 case 'Porters':
                     return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        stroke: false,
+                        pane: 'pane_GorgesPolygons_10',
+                        opacity: 1,
+                        color: 'rgba(76,76,76,0.6)',
+                        dashArray: '',
+                        lineCap: 'butt',
+                        lineJoin: 'miter',
+                        weight: 1.0,
+                        fill: true,
                         fillOpacity: 1,
-                        fillPattern: pattern_SchluchtenPolygon_8_0,
+                        fillColor: 'rgba(137,208,101,0.6)',
                         interactive: false,
                     }
                     break;
                 case 'Quagga':
                     return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        stroke: false,
+                        pane: 'pane_GorgesPolygons_10',
+                        opacity: 1,
+                        color: 'rgba(76,76,76,0.6)',
+                        dashArray: '',
+                        lineCap: 'butt',
+                        lineJoin: 'miter',
+                        weight: 1.0,
+                        fill: true,
                         fillOpacity: 1,
-                        fillPattern: pattern_SchluchtenPolygon_8_0,
+                        fillColor: 'rgba(42,206,103,0.6)',
                         interactive: false,
                     }
                     break;
                 case 'Raiders':
                     return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        stroke: false,
+                        pane: 'pane_GorgesPolygons_10',
+                        opacity: 1,
+                        color: 'rgba(76,76,76,0.6)',
+                        dashArray: '',
+                        lineCap: 'butt',
+                        lineJoin: 'miter',
+                        weight: 1.0,
+                        fill: true,
                         fillOpacity: 1,
-                        fillPattern: pattern_SchluchtenPolygon_8_0,
+                        fillColor: 'rgba(191,215,116,0.6)',
                         interactive: false,
                     }
                     break;
                 case 'Schafschlucht':
                     return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        stroke: false,
+                        pane: 'pane_GorgesPolygons_10',
+                        opacity: 1,
+                        color: 'rgba(76,76,76,0.6)',
+                        dashArray: '',
+                        lineCap: 'butt',
+                        lineJoin: 'miter',
+                        weight: 1.0,
+                        fill: true,
                         fillOpacity: 1,
-                        fillPattern: pattern_SchluchtenPolygon_8_0,
+                        fillColor: 'rgba(225,101,85,0.6)',
                         interactive: false,
                     }
                     break;
                 case 'Sesaub':
                     return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        stroke: false,
+                        pane: 'pane_GorgesPolygons_10',
+                        opacity: 1,
+                        color: 'rgba(76,76,76,0.6)',
+                        dashArray: '',
+                        lineCap: 'butt',
+                        lineJoin: 'miter',
+                        weight: 1.0,
+                        fill: true,
                         fillOpacity: 1,
-                        fillPattern: pattern_SchluchtenPolygon_8_0,
+                        fillColor: 'rgba(20,69,215,0.6)',
                         interactive: false,
                     }
                     break;
                 case 'Sonusib':
                     return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        stroke: false,
+                        pane: 'pane_GorgesPolygons_10',
+                        opacity: 1,
+                        color: 'rgba(76,76,76,0.6)',
+                        dashArray: '',
+                        lineCap: 'butt',
+                        lineJoin: 'miter',
+                        weight: 1.0,
+                        fill: true,
                         fillOpacity: 1,
-                        fillPattern: pattern_SchluchtenPolygon_8_0,
+                        fillColor: 'rgba(122,212,179,0.6)',
                         interactive: false,
                     }
                     break;
                 case 'Tsisab':
                     return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        stroke: false,
+                        pane: 'pane_GorgesPolygons_10',
+                        opacity: 1,
+                        color: 'rgba(76,76,76,0.6)',
+                        dashArray: '',
+                        lineCap: 'butt',
+                        lineJoin: 'miter',
+                        weight: 1.0,
+                        fill: true,
                         fillOpacity: 1,
-                        fillPattern: pattern_SchluchtenPolygon_8_0,
+                        fillColor: 'rgba(145,229,65,0.6)',
                         interactive: false,
                     }
                     break;
                 case 'Umuab':
                     return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        stroke: false,
+                        pane: 'pane_GorgesPolygons_10',
+                        opacity: 1,
+                        color: 'rgba(76,76,76,0.6)',
+                        dashArray: '',
+                        lineCap: 'butt',
+                        lineJoin: 'miter',
+                        weight: 1.0,
+                        fill: true,
                         fillOpacity: 1,
-                        fillPattern: pattern_SchluchtenPolygon_8_0,
+                        fillColor: 'rgba(230,118,48,0.6)',
                         interactive: false,
                     }
                     break;
                 default:
                     return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        stroke: false,
+                        pane: 'pane_GorgesPolygons_10',
+                        opacity: 1,
+                        color: 'rgba(76,76,76,0.6)',
+                        dashArray: '',
+                        lineCap: 'butt',
+                        lineJoin: 'miter',
+                        weight: 1.0,
+                        fill: true,
                         fillOpacity: 1,
-                        fillPattern: pattern_SchluchtenPolygon_8_0,
+                        fillColor: 'rgba(61,59,221,0.6)',
                         interactive: false,
                     }
                     break;
             }
         }
-        function style_SchluchtenPolygon_8_1(feature) {
-            switch (String(feature.properties['Name'])) {
-                case 'Amis':
-                    return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        opacity: 1,
-                        color: 'rgba(23,38,203,1.0)',
-                        dashArray: '',
-                        lineCap: 'square',
-                        lineJoin: 'bevel',
-                        weight: 2.0,
-                        fillOpacity: 0,
-                        interactive: false,
-                    }
-                    break;
-                case 'Circus':
-                    return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        opacity: 1,
-                        color: 'rgba(212,152,39,1.0)',
-                        dashArray: '',
-                        lineCap: 'square',
-                        lineJoin: 'bevel',
-                        weight: 2.0,
-                        fillOpacity: 0,
-                        interactive: false,
-                    }
-                    break;
-                case 'Dom':
-                    return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        opacity: 1,
-                        color: 'rgba(20,140,209,1.0)',
-                        dashArray: '',
-                        lineCap: 'square',
-                        lineJoin: 'bevel',
-                        weight: 2.0,
-                        fillOpacity: 0,
-                        interactive: false,
-                    }
-                    break;
-                case 'Eros':
-                    return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        opacity: 1,
-                        color: 'rgba(231,64,49,1.0)',
-                        dashArray: '',
-                        lineCap: 'square',
-                        lineJoin: 'bevel',
-                        weight: 2.0,
-                        fillOpacity: 0,
-                        interactive: false,
-                    }
-                    break;
-                case 'Furrow':
-                    return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        opacity: 1,
-                        color: 'rgba(90,227,202,1.0)',
-                        dashArray: '',
-                        lineCap: 'square',
-                        lineJoin: 'bevel',
-                        weight: 2.0,
-                        fillOpacity: 0,
-                        interactive: false,
-                    }
-                    break;
-                case 'Ga\'aseb':
-                    return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        opacity: 1,
-                        color: 'rgba(221,106,44,1.0)',
-                        dashArray: '',
-                        lineCap: 'square',
-                        lineJoin: 'bevel',
-                        weight: 2.0,
-                        fillOpacity: 0,
-                        interactive: false,
-                    }
-                    break;
-                case 'Hungorob':
-                    return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        opacity: 1,
-                        color: 'rgba(27,219,133,1.0)',
-                        dashArray: '',
-                        lineCap: 'square',
-                        lineJoin: 'bevel',
-                        weight: 2.0,
-                        fillOpacity: 0,
-                        interactive: false,
-                    }
-                    break;
-                case 'Karoab':
-                    return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        opacity: 1,
-                        color: 'rgba(188,108,220,1.0)',
-                        dashArray: '',
-                        lineCap: 'square',
-                        lineJoin: 'bevel',
-                        weight: 2.0,
-                        fillOpacity: 0,
-                        interactive: false,
-                    }
-                    break;
-                case 'Märchen':
-                    return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        opacity: 1,
-                        color: 'rgba(224,210,52,1.0)',
-                        dashArray: '',
-                        lineCap: 'square',
-                        lineJoin: 'bevel',
-                        weight: 2.0,
-                        fillOpacity: 0,
-                        interactive: false,
-                    }
-                    break;
-                case 'Naib':
-                    return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        opacity: 1,
-                        color: 'rgba(157,213,93,1.0)',
-                        dashArray: '',
-                        lineCap: 'square',
-                        lineJoin: 'bevel',
-                        weight: 2.0,
-                        fillOpacity: 0,
-                        interactive: false,
-                    }
-                    break;
-                case 'Numas':
-                    return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        opacity: 1,
-                        color: 'rgba(201,48,160,1.0)',
-                        dashArray: '',
-                        lineCap: 'square',
-                        lineJoin: 'bevel',
-                        weight: 2.0,
-                        fillOpacity: 0,
-                        interactive: false,
-                    }
-                    break;
-                case 'Nuwuarib':
-                    return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        opacity: 1,
-                        color: 'rgba(144,236,110,1.0)',
-                        dashArray: '',
-                        lineCap: 'square',
-                        lineJoin: 'bevel',
-                        weight: 2.0,
-                        fillOpacity: 0,
-                        interactive: false,
-                    }
-                    break;
-                case 'Orabes':
-                    return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        opacity: 1,
-                        color: 'rgba(43,113,234,1.0)',
-                        dashArray: '',
-                        lineCap: 'square',
-                        lineJoin: 'bevel',
-                        weight: 2.0,
-                        fillOpacity: 0,
-                        interactive: false,
-                    }
-                    break;
-                case 'Porters':
-                    return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        opacity: 1,
-                        color: 'rgba(20,213,20,1.0)',
-                        dashArray: '',
-                        lineCap: 'square',
-                        lineJoin: 'bevel',
-                        weight: 2.0,
-                        fillOpacity: 0,
-                        interactive: false,
-                    }
-                    break;
-                case 'Quagga':
-                    return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        opacity: 1,
-                        color: 'rgba(238,56,89,1.0)',
-                        dashArray: '',
-                        lineCap: 'square',
-                        lineJoin: 'bevel',
-                        weight: 2.0,
-                        fillOpacity: 0,
-                        interactive: false,
-                    }
-                    break;
-                case 'Raiders':
-                    return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        opacity: 1,
-                        color: 'rgba(54,222,240,1.0)',
-                        dashArray: '',
-                        lineCap: 'square',
-                        lineJoin: 'bevel',
-                        weight: 2.0,
-                        fillOpacity: 0,
-                        interactive: false,
-                    }
-                    break;
-                case 'Schafschlucht':
-                    return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        opacity: 1,
-                        color: 'rgba(128,220,154,1.0)',
-                        dashArray: '',
-                        lineCap: 'square',
-                        lineJoin: 'bevel',
-                        weight: 2.0,
-                        fillOpacity: 0,
-                        interactive: false,
-                    }
-                    break;
-                case 'Sesaub':
-                    return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        opacity: 1,
-                        color: 'rgba(214,236,112,1.0)',
-                        dashArray: '',
-                        lineCap: 'square',
-                        lineJoin: 'bevel',
-                        weight: 2.0,
-                        fillOpacity: 0,
-                        interactive: false,
-                    }
-                    break;
-                case 'Sonusib':
-                    return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        opacity: 1,
-                        color: 'rgba(211,84,144,1.0)',
-                        dashArray: '',
-                        lineCap: 'square',
-                        lineJoin: 'bevel',
-                        weight: 2.0,
-                        fillOpacity: 0,
-                        interactive: false,
-                    }
-                    break;
-                case 'Tsisab':
-                    return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        opacity: 1,
-                        color: 'rgba(122,55,203,1.0)',
-                        dashArray: '',
-                        lineCap: 'square',
-                        lineJoin: 'bevel',
-                        weight: 2.0,
-                        fillOpacity: 0,
-                        interactive: false,
-                    }
-                    break;
-                case 'Umuab':
-                    return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        opacity: 1,
-                        color: 'rgba(113,87,227,1.0)',
-                        dashArray: '',
-                        lineCap: 'square',
-                        lineJoin: 'bevel',
-                        weight: 2.0,
-                        fillOpacity: 0,
-                        interactive: false,
-                    }
-                    break;
-                default:
-                    return {
-                        pane: 'pane_SchluchtenPolygon_8',
-                        opacity: 1,
-                        color: 'rgba(240,117,240,1.0)',
-                        dashArray: '',
-                        lineCap: 'square',
-                        lineJoin: 'bevel',
-                        weight: 2.0,
-                        fillOpacity: 0,
-                        interactive: false,
-                    }
-                    break;
-            }
-        }
-        map.createPane('pane_SchluchtenPolygon_8');
-        map.getPane('pane_SchluchtenPolygon_8').style.zIndex = 408;
-        map.getPane('pane_SchluchtenPolygon_8').style['mix-blend-mode'] = 'normal';
-        var layer_SchluchtenPolygon_8 = new L.geoJson.multiStyle(json_SchluchtenPolygon_8, {
+        map.createPane('pane_GorgesPolygons_10');
+        map.getPane('pane_GorgesPolygons_10').style.zIndex = 410;
+        map.getPane('pane_GorgesPolygons_10').style['mix-blend-mode'] = 'lighten';
+        var layer_GorgesPolygons_10 = new L.geoJson(json_GorgesPolygons_10, {
             attribution: '',
             interactive: false,
-            dataVar: 'json_SchluchtenPolygon_8',
-            layerName: 'layer_SchluchtenPolygon_8',
-            pane: 'pane_SchluchtenPolygon_8',
-            onEachFeature: pop_SchluchtenPolygon_8,
-            styles: [style_SchluchtenPolygon_8_0, style_SchluchtenPolygon_8_1,]
+            dataVar: 'json_GorgesPolygons_10',
+            layerName: 'layer_GorgesPolygons_10',
+            pane: 'pane_GorgesPolygons_10',
+            onEachFeature: pop_GorgesPolygons_10,
+            style: style_GorgesPolygons_10_0,
         });
-        bounds_group.addLayer(layer_SchluchtenPolygon_8);
-        map.addLayer(layer_SchluchtenPolygon_8);
-        map.createPane('pane_HeatmapElevation_9');
-        map.getPane('pane_HeatmapElevation_9').style.zIndex = 409;
-        var img_HeatmapElevation_9 = 'data/HeatmapElevation_9.png';
-        var img_bounds_HeatmapElevation_9 = [[-21.26094434061082, 14.42580070124248], [-20.994672694697517, 14.663507462362787]];
-        var layer_HeatmapElevation_9 = new L.imageOverlay(img_HeatmapElevation_9,
-            img_bounds_HeatmapElevation_9,
-            { pane: 'pane_HeatmapElevation_9' });
-        bounds_group.addLayer(layer_HeatmapElevation_9);
-        map.addLayer(layer_HeatmapElevation_9);
-        function pop_Sites_10(feature, layer) {
+        bounds_group.addLayer(layer_GorgesPolygons_10);
+        map.addLayer(layer_GorgesPolygons_10);
+        function pop_Sites_11(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Site'] !== null ? autolinker.link(feature.properties['Site'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Site</th>\
+                        <td>' + (feature.properties['Site'] !== null ? autolinker.link(feature.properties['Site'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Gorge'] !== null ? autolinker.link(feature.properties['Gorge'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Gorge</th>\
+                        <td>' + (feature.properties['Gorge'] !== null ? autolinker.link(feature.properties['Gorge'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Site Nickname'] !== null ? autolinker.link(feature.properties['Site Nickname'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Site Nickname</th>\
+                        <td>' + (feature.properties['Site Nickname'] !== null ? autolinker.link(feature.properties['Site Nickname'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Discoverer'] !== null ? autolinker.link(feature.properties['Discoverer'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Discoverer</th>\
+                        <td>' + (feature.properties['Discoverer'] !== null ? autolinker.link(feature.properties['Discoverer'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Date of Discovery'] !== null ? autolinker.link(feature.properties['Date of Discovery'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Date of Discovery</th>\
+                        <td>' + (feature.properties['Date of Discovery'] !== null ? autolinker.link(feature.properties['Date of Discovery'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Publication'] !== null ? autolinker.link(feature.properties['Publication'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Publication</th>\
+                        <td>' + (feature.properties['Publication'] !== null ? autolinker.link(feature.properties['Publication'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['ISBN 10'] !== null ? autolinker.link(feature.properties['ISBN 10'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">ISBN 10</th>\
+                        <td>' + (feature.properties['ISBN 10'] !== null ? autolinker.link(feature.properties['ISBN 10'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Water in Sight'] !== null ? autolinker.link(feature.properties['Water in Sight'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Water in Sight</th>\
+                        <td>' + (feature.properties['Water in Sight'] !== null ? autolinker.link(feature.properties['Water in Sight'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Water Availability'] !== null ? autolinker.link(feature.properties['Water Availability'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Water Availability</th>\
+                        <td>' + (feature.properties['Water Availability'] !== null ? autolinker.link(feature.properties['Water Availability'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Open Field in Sight'] !== null ? autolinker.link(feature.properties['Open Field in Sight'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Open Field in Sight</th>\
+                        <td>' + (feature.properties['Open Field in Sight'] !== null ? autolinker.link(feature.properties['Open Field in Sight'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Open Field'] !== null ? autolinker.link(feature.properties['Open Field'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Open Field</th>\
+                        <td>' + (feature.properties['Open Field'] !== null ? autolinker.link(feature.properties['Open Field'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Living Place'] !== null ? autolinker.link(feature.properties['Living Place'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Living Place</th>\
+                        <td>' + (feature.properties['Living Place'] !== null ? autolinker.link(feature.properties['Living Place'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, { maxHeight: 400 });
         }
 
-        function style_Sites_10_0(feature) {
+        function style_Sites_11_0(feature) {
             switch (String(feature.properties['Gorge'])) {
                 case 'Amis':
                     return {
-                        pane: 'pane_Sites_10',
-                        radius: 16.0,
+                        pane: 'pane_Sites_11',
+                        radius: 8.0,
                         opacity: 1,
                         color: 'rgba(35,35,35,1.0)',
                         dashArray: '',
                         lineCap: 'butt',
                         lineJoin: 'miter',
-                        weight: 3.0,
+                        weight: 1.0,
                         fill: true,
                         fillOpacity: 1,
-                        fillColor: 'rgba(234,111,148,1.0)',
+                        fillColor: 'rgba(128,238,212,1.0)',
                         interactive: true,
                     }
                     break;
                 case 'Circus':
                     return {
-                        pane: 'pane_Sites_10',
-                        radius: 16.0,
+                        pane: 'pane_Sites_11',
+                        radius: 8.0,
                         opacity: 1,
                         color: 'rgba(35,35,35,1.0)',
                         dashArray: '',
                         lineCap: 'butt',
                         lineJoin: 'miter',
-                        weight: 3.0,
+                        weight: 1.0,
                         fill: true,
                         fillOpacity: 1,
-                        fillColor: 'rgba(44,98,213,1.0)',
+                        fillColor: 'rgba(213,38,134,1.0)',
                         interactive: true,
                     }
                     break;
                 case 'Dom':
                     return {
-                        pane: 'pane_Sites_10',
-                        radius: 16.0,
+                        pane: 'pane_Sites_11',
+                        radius: 8.0,
                         opacity: 1,
                         color: 'rgba(35,35,35,1.0)',
                         dashArray: '',
                         lineCap: 'butt',
                         lineJoin: 'miter',
-                        weight: 3.0,
+                        weight: 1.0,
                         fill: true,
                         fillOpacity: 1,
-                        fillColor: 'rgba(184,109,219,1.0)',
+                        fillColor: 'rgba(45,209,227,1.0)',
                         interactive: true,
                     }
                     break;
                 case 'Eros':
                     return {
-                        pane: 'pane_Sites_10',
-                        radius: 16.0,
+                        pane: 'pane_Sites_11',
+                        radius: 8.0,
                         opacity: 1,
                         color: 'rgba(35,35,35,1.0)',
                         dashArray: '',
                         lineCap: 'butt',
                         lineJoin: 'miter',
-                        weight: 3.0,
+                        weight: 1.0,
                         fill: true,
                         fillOpacity: 1,
-                        fillColor: 'rgba(50,201,203,1.0)',
+                        fillColor: 'rgba(152,109,205,1.0)',
                         interactive: true,
                     }
                     break;
                 case 'Furrow':
                     return {
-                        pane: 'pane_Sites_10',
-                        radius: 16.0,
+                        pane: 'pane_Sites_11',
+                        radius: 8.0,
                         opacity: 1,
                         color: 'rgba(35,35,35,1.0)',
                         dashArray: '',
                         lineCap: 'butt',
                         lineJoin: 'miter',
-                        weight: 3.0,
+                        weight: 1.0,
                         fill: true,
                         fillOpacity: 1,
-                        fillColor: 'rgba(219,75,217,1.0)',
+                        fillColor: 'rgba(199,208,114,1.0)',
                         interactive: true,
                     }
                     break;
                 case 'Ga\'aseb':
                     return {
-                        pane: 'pane_Sites_10',
-                        radius: 16.0,
+                        pane: 'pane_Sites_11',
+                        radius: 8.0,
                         opacity: 1,
                         color: 'rgba(35,35,35,1.0)',
                         dashArray: '',
                         lineCap: 'butt',
                         lineJoin: 'miter',
-                        weight: 3.0,
+                        weight: 1.0,
                         fill: true,
                         fillOpacity: 1,
-                        fillColor: 'rgba(132,224,164,1.0)',
+                        fillColor: 'rgba(240,47,89,1.0)',
                         interactive: true,
                     }
                     break;
                 case 'Hungorob':
                     return {
-                        pane: 'pane_Sites_10',
-                        radius: 16.0,
+                        pane: 'pane_Sites_11',
+                        radius: 8.0,
                         opacity: 1,
                         color: 'rgba(35,35,35,1.0)',
                         dashArray: '',
                         lineCap: 'butt',
                         lineJoin: 'miter',
-                        weight: 3.0,
+                        weight: 1.0,
                         fill: true,
                         fillOpacity: 1,
-                        fillColor: 'rgba(227,119,115,1.0)',
+                        fillColor: 'rgba(85,220,98,1.0)',
                         interactive: true,
                     }
                     break;
                 case 'Karoab':
                     return {
-                        pane: 'pane_Sites_10',
-                        radius: 16.0,
+                        pane: 'pane_Sites_11',
+                        radius: 8.0,
                         opacity: 1,
                         color: 'rgba(35,35,35,1.0)',
                         dashArray: '',
                         lineCap: 'butt',
                         lineJoin: 'miter',
-                        weight: 3.0,
+                        weight: 1.0,
                         fill: true,
                         fillOpacity: 1,
-                        fillColor: 'rgba(216,186,117,1.0)',
+                        fillColor: 'rgba(120,212,160,1.0)',
                         interactive: true,
                     }
                     break;
                 case 'Märchen':
                     return {
-                        pane: 'pane_Sites_10',
-                        radius: 16.0,
+                        pane: 'pane_Sites_11',
+                        radius: 8.0,
                         opacity: 1,
                         color: 'rgba(35,35,35,1.0)',
                         dashArray: '',
                         lineCap: 'butt',
                         lineJoin: 'miter',
-                        weight: 3.0,
+                        weight: 1.0,
                         fill: true,
                         fillOpacity: 1,
-                        fillColor: 'rgba(183,240,85,1.0)',
+                        fillColor: 'rgba(103,226,66,1.0)',
                         interactive: true,
                     }
                     break;
                 case 'Naib':
                     return {
-                        pane: 'pane_Sites_10',
-                        radius: 16.0,
+                        pane: 'pane_Sites_11',
+                        radius: 8.0,
                         opacity: 1,
                         color: 'rgba(35,35,35,1.0)',
                         dashArray: '',
                         lineCap: 'butt',
                         lineJoin: 'miter',
-                        weight: 3.0,
+                        weight: 1.0,
                         fill: true,
                         fillOpacity: 1,
-                        fillColor: 'rgba(105,103,209,1.0)',
+                        fillColor: 'rgba(230,146,78,1.0)',
                         interactive: true,
                     }
                     break;
                 case 'Numas':
                     return {
-                        pane: 'pane_Sites_10',
-                        radius: 16.0,
+                        pane: 'pane_Sites_11',
+                        radius: 8.0,
                         opacity: 1,
                         color: 'rgba(35,35,35,1.0)',
                         dashArray: '',
                         lineCap: 'butt',
                         lineJoin: 'miter',
-                        weight: 3.0,
+                        weight: 1.0,
                         fill: true,
                         fillOpacity: 1,
-                        fillColor: 'rgba(80,167,214,1.0)',
+                        fillColor: 'rgba(231,89,71,1.0)',
                         interactive: true,
                     }
                     break;
                 case 'Orabes':
                     return {
-                        pane: 'pane_Sites_10',
-                        radius: 16.0,
+                        pane: 'pane_Sites_11',
+                        radius: 8.0,
                         opacity: 1,
                         color: 'rgba(35,35,35,1.0)',
                         dashArray: '',
                         lineCap: 'butt',
                         lineJoin: 'miter',
-                        weight: 3.0,
+                        weight: 1.0,
                         fill: true,
                         fillOpacity: 1,
-                        fillColor: 'rgba(14,208,147,1.0)',
+                        fillColor: 'rgba(40,18,209,1.0)',
                         interactive: true,
                     }
                     break;
                 case 'Porters':
                     return {
-                        pane: 'pane_Sites_10',
-                        radius: 16.0,
+                        pane: 'pane_Sites_11',
+                        radius: 8.0,
                         opacity: 1,
                         color: 'rgba(35,35,35,1.0)',
                         dashArray: '',
                         lineCap: 'butt',
                         lineJoin: 'miter',
-                        weight: 3.0,
+                        weight: 1.0,
                         fill: true,
                         fillOpacity: 1,
-                        fillColor: 'rgba(200,113,62,1.0)',
+                        fillColor: 'rgba(183,238,112,1.0)',
                         interactive: true,
                     }
                     break;
                 case 'Quagga':
                     return {
-                        pane: 'pane_Sites_10',
-                        radius: 16.0,
+                        pane: 'pane_Sites_11',
+                        radius: 8.0,
                         opacity: 1,
                         color: 'rgba(35,35,35,1.0)',
                         dashArray: '',
                         lineCap: 'butt',
                         lineJoin: 'miter',
-                        weight: 3.0,
+                        weight: 1.0,
                         fill: true,
                         fillOpacity: 1,
-                        fillColor: 'rgba(135,237,137,1.0)',
+                        fillColor: 'rgba(20,64,208,1.0)',
                         interactive: true,
                     }
                     break;
                 case 'Raiders':
                     return {
-                        pane: 'pane_Sites_10',
-                        radius: 16.0,
+                        pane: 'pane_Sites_11',
+                        radius: 8.0,
                         opacity: 1,
                         color: 'rgba(35,35,35,1.0)',
                         dashArray: '',
                         lineCap: 'butt',
                         lineJoin: 'miter',
-                        weight: 3.0,
+                        weight: 1.0,
                         fill: true,
                         fillOpacity: 1,
-                        fillColor: 'rgba(107,40,232,1.0)',
+                        fillColor: 'rgba(208,169,29,1.0)',
                         interactive: true,
                     }
                     break;
                 case 'Sesaub / Basswaldrinne':
                     return {
-                        pane: 'pane_Sites_10',
-                        radius: 16.0,
+                        pane: 'pane_Sites_11',
+                        radius: 8.0,
                         opacity: 1,
                         color: 'rgba(35,35,35,1.0)',
                         dashArray: '',
                         lineCap: 'butt',
                         lineJoin: 'miter',
-                        weight: 3.0,
+                        weight: 1.0,
                         fill: true,
                         fillOpacity: 1,
-                        fillColor: 'rgba(223,229,47,1.0)',
+                        fillColor: 'rgba(183,59,217,1.0)',
                         interactive: true,
                     }
                     break;
                 case 'Umuab':
                     return {
-                        pane: 'pane_Sites_10',
-                        radius: 16.0,
+                        pane: 'pane_Sites_11',
+                        radius: 8.0,
                         opacity: 1,
                         color: 'rgba(35,35,35,1.0)',
                         dashArray: '',
                         lineCap: 'butt',
                         lineJoin: 'miter',
-                        weight: 3.0,
+                        weight: 1.0,
                         fill: true,
                         fillOpacity: 1,
-                        fillColor: 'rgba(212,128,181,1.0)',
-                        interactive: true,
-                    }
-                    break;
-                default:
-                    return {
-                        pane: 'pane_Sites_10',
-                        radius: 16.0,
-                        opacity: 1,
-                        color: 'rgba(35,35,35,1.0)',
-                        dashArray: '',
-                        lineCap: 'butt',
-                        lineJoin: 'miter',
-                        weight: 3.0,
-                        fill: true,
-                        fillOpacity: 1,
-                        fillColor: 'rgba(113,228,60,1.0)',
+                        fillColor: 'rgba(222,133,212,1.0)',
                         interactive: true,
                     }
                     break;
             }
         }
-        map.createPane('pane_Sites_10');
-        map.getPane('pane_Sites_10').style.zIndex = 410;
-        map.getPane('pane_Sites_10').style['mix-blend-mode'] = 'normal';
-        var layer_Sites_10 = new L.geoJson(json_Sites_10, {
+        map.createPane('pane_Sites_11');
+        map.getPane('pane_Sites_11').style.zIndex = 411;
+        map.getPane('pane_Sites_11').style['mix-blend-mode'] = 'normal';
+        var layer_Sites_11 = new L.geoJson(json_Sites_11, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Sites_10',
-            layerName: 'layer_Sites_10',
-            pane: 'pane_Sites_10',
-            onEachFeature: pop_Sites_10,
+            dataVar: 'json_Sites_11',
+            layerName: 'layer_Sites_11',
+            pane: 'pane_Sites_11',
+            onEachFeature: pop_Sites_11,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_Sites_10_0(feature));
+                return L.circleMarker(latlng, style_Sites_11_0(feature));
             },
         });
-        var cluster_Sites_10 = new L.MarkerClusterGroup({
-            showCoverageOnHover: false,
-            spiderfyDistanceMultiplier: 2
-        });
-        cluster_Sites_10.addLayer(layer_Sites_10);
-
-        bounds_group.addLayer(layer_Sites_10);
-        cluster_Sites_10.addTo(map);
-        function pop_Figures_11(feature, layer) {
+        bounds_group.addLayer(layer_Sites_11);
+        map.addLayer(layer_Sites_11);
+        function pop_FiguresQuantity_12(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Site'] !== null ? autolinker.link(feature.properties['Site'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">ID</th>\
+                        <td>' + (feature.properties['ID'] !== null ? autolinker.link(feature.properties['ID'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Number of Figures'] !== null ? autolinker.link(feature.properties['Number of Figures'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Site</th>\
+                        <td>' + (feature.properties['Site'] !== null ? autolinker.link(feature.properties['Site'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Figure Category'] !== null ? autolinker.link(feature.properties['Figure Category'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Longitude UTM</th>\
+                        <td>' + (feature.properties['Longitude UTM'] !== null ? autolinker.link(feature.properties['Longitude UTM'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Living Place'] !== null ? autolinker.link(feature.properties['Living Place'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Latitude UTM</th>\
+                        <td>' + (feature.properties['Latitude UTM'] !== null ? autolinker.link(feature.properties['Latitude UTM'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Degradation of Paintings'] !== null ? autolinker.link(feature.properties['Degradation of Paintings'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Elevation</th>\
+                        <td>' + (feature.properties['Elevation'] !== null ? autolinker.link(feature.properties['Elevation'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Gorge</th>\
+                        <td>' + (feature.properties['Gorge'] !== null ? autolinker.link(feature.properties['Gorge'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Site Nickname</th>\
+                        <td>' + (feature.properties['Site Nickname'] !== null ? autolinker.link(feature.properties['Site Nickname'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Number of Figures</th>\
+                        <td>' + (feature.properties['Number of Figures'] !== null ? autolinker.link(feature.properties['Number of Figures'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Figure Category</th>\
+                        <td>' + (feature.properties['Figure Category'] !== null ? autolinker.link(feature.properties['Figure Category'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Quantity of Artefacts</th>\
+                        <td>' + (feature.properties['Quantity of Artefacts'] !== null ? autolinker.link(feature.properties['Quantity of Artefacts'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, { maxHeight: 400 });
         }
 
-        function style_Figures_11_0(feature) {
-            if (feature.properties['Number of Figures'] >= 0.000000 && feature.properties['Number of Figures'] <= 5.000000) {
+        function style_FiguresQuantity_12_0(feature) {
+            if (feature.properties['Number of Figures'] >= 1.000000 && feature.properties['Number of Figures'] <= 10.000000) {
                 return {
-                    pane: 'pane_Figures_11',
-                    radius: 10.0,
+                    pane: 'pane_FiguresQuantity_12',
+                    radius: 8.0,
                     opacity: 1,
-                    color: 'rgba(0,0,0,1.0)',
+                    color: 'rgba(61,50,87,1.0)',
                     dashArray: '',
                     lineCap: 'butt',
                     lineJoin: 'miter',
-                    weight: 2.0,
+                    weight: 1.0,
                     fill: true,
                     fillOpacity: 1,
-                    fillColor: 'rgba(255,219,171,1.0)',
+                    fillColor: 'rgba(255,255,255,1.0)',
                     interactive: true,
                 }
             }
-            if (feature.properties['Number of Figures'] >= 5.000000 && feature.properties['Number of Figures'] <= 12.000000) {
+            if (feature.properties['Number of Figures'] >= 10.000000 && feature.properties['Number of Figures'] <= 50.000000) {
                 return {
-                    pane: 'pane_Figures_11',
-                    radius: 15.0,
+                    pane: 'pane_FiguresQuantity_12',
+                    radius: 8.0,
                     opacity: 1,
-                    color: 'rgba(0,0,0,1.0)',
+                    color: 'rgba(61,50,87,1.0)',
                     dashArray: '',
                     lineCap: 'butt',
                     lineJoin: 'miter',
-                    weight: 2.0,
+                    weight: 1.0,
                     fill: true,
                     fillOpacity: 1,
-                    fillColor: 'rgba(229,197,154,1.0)',
+                    fillColor: 'rgba(255,191,191,1.0)',
                     interactive: true,
                 }
             }
-            if (feature.properties['Number of Figures'] >= 12.000000 && feature.properties['Number of Figures'] <= 28.000000) {
+            if (feature.properties['Number of Figures'] >= 50.000000 && feature.properties['Number of Figures'] <= 100.000000) {
                 return {
-                    pane: 'pane_Figures_11',
-                    radius: 20.0,
+                    pane: 'pane_FiguresQuantity_12',
+                    radius: 8.0,
                     opacity: 1,
-                    color: 'rgba(0,0,0,1.0)',
+                    color: 'rgba(61,50,87,1.0)',
                     dashArray: '',
                     lineCap: 'butt',
                     lineJoin: 'miter',
-                    weight: 2.0,
+                    weight: 1.0,
                     fill: true,
                     fillOpacity: 1,
-                    fillColor: 'rgba(218,187,146,1.0)',
+                    fillColor: 'rgba(255,128,128,1.0)',
                     interactive: true,
                 }
             }
-            if (feature.properties['Number of Figures'] >= 28.000000 && feature.properties['Number of Figures'] <= 69.000000) {
+            if (feature.properties['Number of Figures'] >= 100.000000 && feature.properties['Number of Figures'] <= 500.000000) {
                 return {
-                    pane: 'pane_Figures_11',
-                    radius: 25.0,
+                    pane: 'pane_FiguresQuantity_12',
+                    radius: 8.0,
                     opacity: 1,
-                    color: 'rgba(0,0,0,1.0)',
+                    color: 'rgba(61,50,87,1.0)',
                     dashArray: '',
                     lineCap: 'butt',
                     lineJoin: 'miter',
-                    weight: 2.0,
+                    weight: 1.0,
                     fill: true,
                     fillOpacity: 1,
-                    fillColor: 'rgba(190,163,127,1.0)',
+                    fillColor: 'rgba(255,64,64,1.0)',
                     interactive: true,
                 }
             }
-            if (feature.properties['Number of Figures'] >= 69.000000 && feature.properties['Number of Figures'] <= 1072.000000) {
+            if (feature.properties['Number of Figures'] >= 500.000000 && feature.properties['Number of Figures'] <= 2000.000000) {
                 return {
-                    pane: 'pane_Figures_11',
-                    radius: 30.0,
+                    pane: 'pane_FiguresQuantity_12',
+                    radius: 8.0,
                     opacity: 1,
-                    color: 'rgba(0,0,0,1.0)',
+                    color: 'rgba(61,50,87,1.0)',
                     dashArray: '',
                     lineCap: 'butt',
                     lineJoin: 'miter',
-                    weight: 2.0,
+                    weight: 1.0,
                     fill: true,
                     fillOpacity: 1,
-                    fillColor: 'rgba(152,130,102,1.0)',
+                    fillColor: 'rgba(255,0,0,1.0)',
                     interactive: true,
                 }
             }
         }
-        map.createPane('pane_Figures_11');
-        map.getPane('pane_Figures_11').style.zIndex = 411;
-        map.getPane('pane_Figures_11').style['mix-blend-mode'] = 'normal';
-        var layer_Figures_11 = new L.geoJson(json_Figures_11, {
+        map.createPane('pane_FiguresQuantity_12');
+        map.getPane('pane_FiguresQuantity_12').style.zIndex = 412;
+        map.getPane('pane_FiguresQuantity_12').style['mix-blend-mode'] = 'normal';
+        var layer_FiguresQuantity_12 = new L.geoJson(json_FiguresQuantity_12, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Figures_11',
-            layerName: 'layer_Figures_11',
-            pane: 'pane_Figures_11',
-            onEachFeature: pop_Figures_11,
+            dataVar: 'json_FiguresQuantity_12',
+            layerName: 'layer_FiguresQuantity_12',
+            pane: 'pane_FiguresQuantity_12',
+            onEachFeature: pop_FiguresQuantity_12,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_Figures_11_0(feature));
+                return L.circleMarker(latlng, style_FiguresQuantity_12_0(feature));
             },
         });
-        bounds_group.addLayer(layer_Figures_11);
+        bounds_group.addLayer(layer_FiguresQuantity_12);
+        function pop_WaterAvailability_13(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ID</th>\
+                        <td>' + (feature.properties['ID'] !== null ? autolinker.link(feature.properties['ID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Site</th>\
+                        <td>' + (feature.properties['Site'] !== null ? autolinker.link(feature.properties['Site'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Longitude UTM</th>\
+                        <td>' + (feature.properties['Longitude UTM'] !== null ? autolinker.link(feature.properties['Longitude UTM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Latitude UTM</th>\
+                        <td>' + (feature.properties['Latitude UTM'] !== null ? autolinker.link(feature.properties['Latitude UTM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Elevation</th>\
+                        <td>' + (feature.properties['Elevation'] !== null ? autolinker.link(feature.properties['Elevation'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Gorge</th>\
+                        <td>' + (feature.properties['Gorge'] !== null ? autolinker.link(feature.properties['Gorge'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Date of Discovery</th>\
+                        <td>' + (feature.properties['Date of Discovery'] !== null ? autolinker.link(feature.properties['Date of Discovery'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Water in Sight</th>\
+                        <td>' + (feature.properties['Water in Sight'] !== null ? autolinker.link(feature.properties['Water in Sight'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Water Availability</th>\
+                        <td>' + (feature.properties['Water Availability'] !== null ? autolinker.link(feature.properties['Water Availability'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, { maxHeight: 400 });
+        }
+
+        function style_WaterAvailability_13_0(feature) {
+            switch (String(feature.properties['Water Availability'])) {
+                case '<300m':
+                    return {
+                        pane: 'pane_WaterAvailability_13',
+                        radius: 8.0,
+                        opacity: 1,
+                        color: 'rgba(50,87,128,1.0)',
+                        dashArray: '',
+                        lineCap: 'butt',
+                        lineJoin: 'miter',
+                        weight: 2.0,
+                        fill: true,
+                        fillOpacity: 1,
+                        fillColor: 'rgba(247,251,255,1.0)',
+                        interactive: true,
+                    }
+                    break;
+                case 'adjacent':
+                    return {
+                        pane: 'pane_WaterAvailability_13',
+                        radius: 8.0,
+                        opacity: 1,
+                        color: 'rgba(50,87,128,1.0)',
+                        dashArray: '',
+                        lineCap: 'butt',
+                        lineJoin: 'miter',
+                        weight: 2.0,
+                        fill: true,
+                        fillOpacity: 1,
+                        fillColor: 'rgba(109,178,212,1.0)',
+                        interactive: true,
+                    }
+                    break;
+                case 'within shouting distance':
+                    return {
+                        pane: 'pane_WaterAvailability_13',
+                        radius: 8.0,
+                        opacity: 1,
+                        color: 'rgba(50,87,128,1.0)',
+                        dashArray: '',
+                        lineCap: 'butt',
+                        lineJoin: 'miter',
+                        weight: 2.0,
+                        fill: true,
+                        fillOpacity: 1,
+                        fillColor: 'rgba(28,108,177,1.0)',
+                        interactive: true,
+                    }
+                    break;
+            }
+        }
+        map.createPane('pane_WaterAvailability_13');
+        map.getPane('pane_WaterAvailability_13').style.zIndex = 413;
+        map.getPane('pane_WaterAvailability_13').style['mix-blend-mode'] = 'normal';
+        var layer_WaterAvailability_13 = new L.geoJson(json_WaterAvailability_13, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_WaterAvailability_13',
+            layerName: 'layer_WaterAvailability_13',
+            pane: 'pane_WaterAvailability_13',
+            onEachFeature: pop_WaterAvailability_13,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_WaterAvailability_13_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_WaterAvailability_13);
+        function pop_WaterinSight_14(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ID</th>\
+                        <td>' + (feature.properties['ID'] !== null ? autolinker.link(feature.properties['ID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Site</th>\
+                        <td>' + (feature.properties['Site'] !== null ? autolinker.link(feature.properties['Site'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Longitude UTM</th>\
+                        <td>' + (feature.properties['Longitude UTM'] !== null ? autolinker.link(feature.properties['Longitude UTM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Latitude UTM</th>\
+                        <td>' + (feature.properties['Latitude UTM'] !== null ? autolinker.link(feature.properties['Latitude UTM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Elevation</th>\
+                        <td>' + (feature.properties['Elevation'] !== null ? autolinker.link(feature.properties['Elevation'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Gorge</th>\
+                        <td>' + (feature.properties['Gorge'] !== null ? autolinker.link(feature.properties['Gorge'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Date of Discovery</th>\
+                        <td>' + (feature.properties['Date of Discovery'] !== null ? autolinker.link(feature.properties['Date of Discovery'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Water in Sight</th>\
+                        <td>' + (feature.properties['Water in Sight'] !== null ? autolinker.link(feature.properties['Water in Sight'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Water Availability</th>\
+                        <td>' + (feature.properties['Water Availability'] !== null ? autolinker.link(feature.properties['Water Availability'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, { maxHeight: 400 });
+        }
+
+        function style_WaterinSight_14_0(feature) {
+            switch (String(feature.properties['Water in Sight'])) {
+                case 'True':
+                    return {
+                        pane: 'pane_WaterinSight_14',
+                        radius: 8.0,
+                        opacity: 1,
+                        color: 'rgba(50,87,128,1.0)',
+                        dashArray: '',
+                        lineCap: 'butt',
+                        lineJoin: 'miter',
+                        weight: 1.0,
+                        fill: true,
+                        fillOpacity: 1,
+                        fillColor: 'rgba(36,96,169,1.0)',
+                        interactive: true,
+                    }
+                    break;
+            }
+        }
+        map.createPane('pane_WaterinSight_14');
+        map.getPane('pane_WaterinSight_14').style.zIndex = 414;
+        map.getPane('pane_WaterinSight_14').style['mix-blend-mode'] = 'normal';
+        var layer_WaterinSight_14 = new L.geoJson(json_WaterinSight_14, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_WaterinSight_14',
+            layerName: 'layer_WaterinSight_14',
+            pane: 'pane_WaterinSight_14',
+            onEachFeature: pop_WaterinSight_14,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_WaterinSight_14_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_WaterinSight_14);
+        function pop_LivingPlace_15(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ID</th>\
+                        <td>' + (feature.properties['ID'] !== null ? autolinker.link(feature.properties['ID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Site</th>\
+                        <td>' + (feature.properties['Site'] !== null ? autolinker.link(feature.properties['Site'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Longitude UTM</th>\
+                        <td>' + (feature.properties['Longitude UTM'] !== null ? autolinker.link(feature.properties['Longitude UTM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Latitude UTM</th>\
+                        <td>' + (feature.properties['Latitude UTM'] !== null ? autolinker.link(feature.properties['Latitude UTM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Elevation</th>\
+                        <td>' + (feature.properties['Elevation'] !== null ? autolinker.link(feature.properties['Elevation'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Gorge</th>\
+                        <td>' + (feature.properties['Gorge'] !== null ? autolinker.link(feature.properties['Gorge'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Number of Figures</th>\
+                        <td>' + (feature.properties['Number of Figures'] !== null ? autolinker.link(feature.properties['Number of Figures'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Living Place</th>\
+                        <td>' + (feature.properties['Living Place'] !== null ? autolinker.link(feature.properties['Living Place'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, { maxHeight: 400 });
+        }
+
+        function style_LivingPlace_15_0(feature) {
+            switch (String(feature.properties['Living Place'])) {
+                case '± vertical rock':
+                    return {
+                        pane: 'pane_LivingPlace_15',
+                        radius: 8.0,
+                        opacity: 1,
+                        color: 'rgba(83,83,83,1.0)',
+                        dashArray: '',
+                        lineCap: 'butt',
+                        lineJoin: 'miter',
+                        weight: 1.0,
+                        fill: true,
+                        fillOpacity: 1,
+                        fillColor: 'rgba(215,25,28,1.0)',
+                        interactive: true,
+                    }
+                    break;
+                case 'spacious':
+                    return {
+                        pane: 'pane_LivingPlace_15',
+                        radius: 8.0,
+                        opacity: 1,
+                        color: 'rgba(83,83,83,1.0)',
+                        dashArray: '',
+                        lineCap: 'butt',
+                        lineJoin: 'miter',
+                        weight: 1.0,
+                        fill: true,
+                        fillOpacity: 1,
+                        fillColor: 'rgba(254,201,128,1.0)',
+                        interactive: true,
+                    }
+                    break;
+                case 'spacious; unfavourable':
+                    return {
+                        pane: 'pane_LivingPlace_15',
+                        radius: 8.0,
+                        opacity: 1,
+                        color: 'rgba(83,83,83,1.0)',
+                        dashArray: '',
+                        lineCap: 'butt',
+                        lineJoin: 'miter',
+                        weight: 1.0,
+                        fill: true,
+                        fillOpacity: 1,
+                        fillColor: 'rgba(199,232,173,1.0)',
+                        interactive: true,
+                    }
+                    break;
+                case 'spacious; unfavourable; ± vertical rock':
+                    return {
+                        pane: 'pane_LivingPlace_15',
+                        radius: 8.0,
+                        opacity: 1,
+                        color: 'rgba(83,83,83,1.0)',
+                        dashArray: '',
+                        lineCap: 'butt',
+                        lineJoin: 'miter',
+                        weight: 1.0,
+                        fill: true,
+                        fillOpacity: 1,
+                        fillColor: 'rgba(43,131,186,1.0)',
+                        interactive: true,
+                    }
+                    break;
+            }
+        }
+        map.createPane('pane_LivingPlace_15');
+        map.getPane('pane_LivingPlace_15').style.zIndex = 415;
+        map.getPane('pane_LivingPlace_15').style['mix-blend-mode'] = 'normal';
+        var layer_LivingPlace_15 = new L.geoJson(json_LivingPlace_15, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_LivingPlace_15',
+            layerName: 'layer_LivingPlace_15',
+            pane: 'pane_LivingPlace_15',
+            onEachFeature: pop_LivingPlace_15,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_LivingPlace_15_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_LivingPlace_15);
+        function pop_LivingPlacewithFigureQuantity_16(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ID</th>\
+                        <td>' + (feature.properties['ID'] !== null ? autolinker.link(feature.properties['ID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Site</th>\
+                        <td>' + (feature.properties['Site'] !== null ? autolinker.link(feature.properties['Site'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Longitude UTM</th>\
+                        <td>' + (feature.properties['Longitude UTM'] !== null ? autolinker.link(feature.properties['Longitude UTM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Latitude UTM</th>\
+                        <td>' + (feature.properties['Latitude UTM'] !== null ? autolinker.link(feature.properties['Latitude UTM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Elevation</th>\
+                        <td>' + (feature.properties['Elevation'] !== null ? autolinker.link(feature.properties['Elevation'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Gorge</th>\
+                        <td>' + (feature.properties['Gorge'] !== null ? autolinker.link(feature.properties['Gorge'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Number of Figures</th>\
+                        <td>' + (feature.properties['Number of Figures'] !== null ? autolinker.link(feature.properties['Number of Figures'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Living Place'] !== null ? autolinker.link(feature.properties['Living Place'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, { maxHeight: 400 });
+        }
+
+        function style_LivingPlacewithFigureQuantity_16_0(feature) {
+            if (feature.properties['Number of Figures'] >= 1.000000 && feature.properties['Number of Figures'] <= 10.000000) {
+                return {
+                    pane: 'pane_LivingPlacewithFigureQuantity_16',
+                    radius: 8.0,
+                    opacity: 1,
+                    color: 'rgba(35,35,35,1.0)',
+                    dashArray: '',
+                    lineCap: 'butt',
+                    lineJoin: 'miter',
+                    weight: 1,
+                    fill: true,
+                    fillOpacity: 1,
+                    fillColor: 'rgba(255,255,255,1.0)',
+                    interactive: true,
+                }
+            }
+            if (feature.properties['Number of Figures'] >= 10.000000 && feature.properties['Number of Figures'] <= 50.000000) {
+                return {
+                    pane: 'pane_LivingPlacewithFigureQuantity_16',
+                    radius: 8.0,
+                    opacity: 1,
+                    color: 'rgba(35,35,35,1.0)',
+                    dashArray: '',
+                    lineCap: 'butt',
+                    lineJoin: 'miter',
+                    weight: 1,
+                    fill: true,
+                    fillOpacity: 1,
+                    fillColor: 'rgba(255,191,191,1.0)',
+                    interactive: true,
+                }
+            }
+            if (feature.properties['Number of Figures'] >= 50.000000 && feature.properties['Number of Figures'] <= 100.000000) {
+                return {
+                    pane: 'pane_LivingPlacewithFigureQuantity_16',
+                    radius: 8.0,
+                    opacity: 1,
+                    color: 'rgba(35,35,35,1.0)',
+                    dashArray: '',
+                    lineCap: 'butt',
+                    lineJoin: 'miter',
+                    weight: 1,
+                    fill: true,
+                    fillOpacity: 1,
+                    fillColor: 'rgba(255,128,128,1.0)',
+                    interactive: true,
+                }
+            }
+            if (feature.properties['Number of Figures'] >= 100.000000 && feature.properties['Number of Figures'] <= 500.000000) {
+                return {
+                    pane: 'pane_LivingPlacewithFigureQuantity_16',
+                    radius: 8.0,
+                    opacity: 1,
+                    color: 'rgba(35,35,35,1.0)',
+                    dashArray: '',
+                    lineCap: 'butt',
+                    lineJoin: 'miter',
+                    weight: 1,
+                    fill: true,
+                    fillOpacity: 1,
+                    fillColor: 'rgba(255,64,64,1.0)',
+                    interactive: true,
+                }
+            }
+            if (feature.properties['Number of Figures'] >= 500.000000 && feature.properties['Number of Figures'] <= 2000.000000) {
+                return {
+                    pane: 'pane_LivingPlacewithFigureQuantity_16',
+                    radius: 8.0,
+                    opacity: 1,
+                    color: 'rgba(35,35,35,1.0)',
+                    dashArray: '',
+                    lineCap: 'butt',
+                    lineJoin: 'miter',
+                    weight: 1,
+                    fill: true,
+                    fillOpacity: 1,
+                    fillColor: 'rgba(255,0,0,1.0)',
+                    interactive: true,
+                }
+            }
+        }
+        map.createPane('pane_LivingPlacewithFigureQuantity_16');
+        map.getPane('pane_LivingPlacewithFigureQuantity_16').style.zIndex = 416;
+        map.getPane('pane_LivingPlacewithFigureQuantity_16').style['mix-blend-mode'] = 'normal';
+        var layer_LivingPlacewithFigureQuantity_16 = new L.geoJson(json_LivingPlacewithFigureQuantity_16, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_LivingPlacewithFigureQuantity_16',
+            layerName: 'layer_LivingPlacewithFigureQuantity_16',
+            pane: 'pane_LivingPlacewithFigureQuantity_16',
+            onEachFeature: pop_LivingPlacewithFigureQuantity_16,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_LivingPlacewithFigureQuantity_16_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_LivingPlacewithFigureQuantity_16);
+        function pop_FiguresQuantitywithWaterinSigth_17(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ID</th>\
+                        <td>' + (feature.properties['ID'] !== null ? autolinker.link(feature.properties['ID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Site</th>\
+                        <td>' + (feature.properties['Site'] !== null ? autolinker.link(feature.properties['Site'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Longitude UTM</th>\
+                        <td>' + (feature.properties['Longitude UTM'] !== null ? autolinker.link(feature.properties['Longitude UTM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Latitude UTM</th>\
+                        <td>' + (feature.properties['Latitude UTM'] !== null ? autolinker.link(feature.properties['Latitude UTM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Elevation</th>\
+                        <td>' + (feature.properties['Elevation'] !== null ? autolinker.link(feature.properties['Elevation'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Gorge</th>\
+                        <td>' + (feature.properties['Gorge'] !== null ? autolinker.link(feature.properties['Gorge'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Date of Discovery</th>\
+                        <td>' + (feature.properties['Date of Discovery'] !== null ? autolinker.link(feature.properties['Date of Discovery'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Number of Figures</th>\
+                        <td>' + (feature.properties['Number of Figures'] !== null ? autolinker.link(feature.properties['Number of Figures'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Painting Location</th>\
+                        <td>' + (feature.properties['Painting Location'] !== null ? autolinker.link(feature.properties['Painting Location'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Water in Sight</th>\
+                        <td>' + (feature.properties['Water in Sight'] !== null ? autolinker.link(feature.properties['Water in Sight'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Water Availability</th>\
+                        <td>' + (feature.properties['Water Availability'] !== null ? autolinker.link(feature.properties['Water Availability'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Evidence of Human Occupation</th>\
+                        <td>' + (feature.properties['Evidence of Human Occupation'] !== null ? autolinker.link(feature.properties['Evidence of Human Occupation'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Degradation of Paintings</th>\
+                        <td>' + (feature.properties['Degradation of Paintings'] !== null ? autolinker.link(feature.properties['Degradation of Paintings'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Quantity of Artefacts</th>\
+                        <td>' + (feature.properties['Quantity of Artefacts'] !== null ? autolinker.link(feature.properties['Quantity of Artefacts'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Lithics</th>\
+                        <td>' + (feature.properties['Lithics'] !== null ? autolinker.link(feature.properties['Lithics'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pottery</th>\
+                        <td>' + (feature.properties['Pottery'] !== null ? autolinker.link(feature.properties['Pottery'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">O.E.S.</th>\
+                        <td>' + (feature.properties['O.E.S.'] !== null ? autolinker.link(feature.properties['O.E.S.'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Bone</th>\
+                        <td>' + (feature.properties['Bone'] !== null ? autolinker.link(feature.properties['Bone'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, { maxHeight: 400 });
+        }
+
+        function style_FiguresQuantitywithWaterinSigth_17_0(feature) {
+            if (feature.properties['Number of Figures'] >= 1.000000 && feature.properties['Number of Figures'] <= 10.000000) {
+                return {
+                    pane: 'pane_FiguresQuantitywithWaterinSigth_17',
+                    radius: 8.0,
+                    opacity: 1,
+                    color: 'rgba(61,50,87,1.0)',
+                    dashArray: '',
+                    lineCap: 'butt',
+                    lineJoin: 'miter',
+                    weight: 1.0,
+                    fill: true,
+                    fillOpacity: 1,
+                    fillColor: 'rgba(255,245,240,1.0)',
+                    interactive: true,
+                }
+            }
+            if (feature.properties['Number of Figures'] >= 10.000000 && feature.properties['Number of Figures'] <= 50.000000) {
+                return {
+                    pane: 'pane_FiguresQuantitywithWaterinSigth_17',
+                    radius: 8.0,
+                    opacity: 1,
+                    color: 'rgba(61,50,87,1.0)',
+                    dashArray: '',
+                    lineCap: 'butt',
+                    lineJoin: 'miter',
+                    weight: 1.0,
+                    fill: true,
+                    fillOpacity: 1,
+                    fillColor: 'rgba(253,190,165,1.0)',
+                    interactive: true,
+                }
+            }
+            if (feature.properties['Number of Figures'] >= 50.000000 && feature.properties['Number of Figures'] <= 100.000000) {
+                return {
+                    pane: 'pane_FiguresQuantitywithWaterinSigth_17',
+                    radius: 8.0,
+                    opacity: 1,
+                    color: 'rgba(61,50,87,1.0)',
+                    dashArray: '',
+                    lineCap: 'butt',
+                    lineJoin: 'miter',
+                    weight: 1.0,
+                    fill: true,
+                    fillOpacity: 1,
+                    fillColor: 'rgba(252,112,80,1.0)',
+                    interactive: true,
+                }
+            }
+            if (feature.properties['Number of Figures'] >= 100.000000 && feature.properties['Number of Figures'] <= 500.000000) {
+                return {
+                    pane: 'pane_FiguresQuantitywithWaterinSigth_17',
+                    radius: 8.0,
+                    opacity: 1,
+                    color: 'rgba(61,50,87,1.0)',
+                    dashArray: '',
+                    lineCap: 'butt',
+                    lineJoin: 'miter',
+                    weight: 1.0,
+                    fill: true,
+                    fillOpacity: 1,
+                    fillColor: 'rgba(212,32,32,1.0)',
+                    interactive: true,
+                }
+            }
+            if (feature.properties['Number of Figures'] >= 500.000000 && feature.properties['Number of Figures'] <= 2000.000000) {
+                return {
+                    pane: 'pane_FiguresQuantitywithWaterinSigth_17',
+                    radius: 8.0,
+                    opacity: 1,
+                    color: 'rgba(61,50,87,1.0)',
+                    dashArray: '',
+                    lineCap: 'butt',
+                    lineJoin: 'miter',
+                    weight: 1.0,
+                    fill: true,
+                    fillOpacity: 1,
+                    fillColor: 'rgba(103,0,13,1.0)',
+                    interactive: true,
+                }
+            }
+        }
+        map.createPane('pane_FiguresQuantitywithWaterinSigth_17');
+        map.getPane('pane_FiguresQuantitywithWaterinSigth_17').style.zIndex = 417;
+        map.getPane('pane_FiguresQuantitywithWaterinSigth_17').style['mix-blend-mode'] = 'normal';
+        var layer_FiguresQuantitywithWaterinSigth_17 = new L.geoJson(json_FiguresQuantitywithWaterinSigth_17, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_FiguresQuantitywithWaterinSigth_17',
+            layerName: 'layer_FiguresQuantitywithWaterinSigth_17',
+            pane: 'pane_FiguresQuantitywithWaterinSigth_17',
+            onEachFeature: pop_FiguresQuantitywithWaterinSigth_17,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_FiguresQuantitywithWaterinSigth_17_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_FiguresQuantitywithWaterinSigth_17);
         var baseMaps = {};
-        L.control.layers(baseMaps, { 'Figures<br /><table><tr><td style="text-align: center;"><img src="legend/Figures_11_050.png" /></td><td>0 - 5</td></tr><tr><td style="text-align: center;"><img src="legend/Figures_11_5121.png" /></td><td>5 - 12</td></tr><tr><td style="text-align: center;"><img src="legend/Figures_11_12282.png" /></td><td>12 - 28</td></tr><tr><td style="text-align: center;"><img src="legend/Figures_11_28693.png" /></td><td>28 - 69</td></tr><tr><td style="text-align: center;"><img src="legend/Figures_11_6910724.png" /></td><td>69 - 1072</td></tr></table>': layer_Figures_11, 'Sites<br /><table><tr><td style="text-align: center;"><img src="legend/Sites_10_Amis0.png" /></td><td>Amis</td></tr><tr><td style="text-align: center;"><img src="legend/Sites_10_Circus1.png" /></td><td>Circus</td></tr><tr><td style="text-align: center;"><img src="legend/Sites_10_Dom2.png" /></td><td>Dom</td></tr><tr><td style="text-align: center;"><img src="legend/Sites_10_Eros3.png" /></td><td>Eros</td></tr><tr><td style="text-align: center;"><img src="legend/Sites_10_Furrow4.png" /></td><td>Furrow</td></tr><tr><td style="text-align: center;"><img src="legend/Sites_10_Gaaseb5.png" /></td><td>Ga\'aseb</td></tr><tr><td style="text-align: center;"><img src="legend/Sites_10_Hungorob6.png" /></td><td>Hungorob</td></tr><tr><td style="text-align: center;"><img src="legend/Sites_10_Karoab7.png" /></td><td>Karoab</td></tr><tr><td style="text-align: center;"><img src="legend/Sites_10_Märchen8.png" /></td><td>Märchen</td></tr><tr><td style="text-align: center;"><img src="legend/Sites_10_Naib9.png" /></td><td>Naib</td></tr><tr><td style="text-align: center;"><img src="legend/Sites_10_Numas10.png" /></td><td>Numas</td></tr><tr><td style="text-align: center;"><img src="legend/Sites_10_Orabes11.png" /></td><td>Orabes</td></tr><tr><td style="text-align: center;"><img src="legend/Sites_10_Porters12.png" /></td><td>Porters</td></tr><tr><td style="text-align: center;"><img src="legend/Sites_10_Quagga13.png" /></td><td>Quagga</td></tr><tr><td style="text-align: center;"><img src="legend/Sites_10_Raiders14.png" /></td><td>Raiders</td></tr><tr><td style="text-align: center;"><img src="legend/Sites_10_SesaubBasswaldrinne15.png" /></td><td>Sesaub / Basswaldrinne</td></tr><tr><td style="text-align: center;"><img src="legend/Sites_10_Umuab16.png" /></td><td>Umuab</td></tr><tr><td style="text-align: center;"><img src="legend/Sites_10_17.png" /></td><td></td></tr></table>': cluster_Sites_10, "HeatmapElevation": layer_HeatmapElevation_9, 'Schluchten Polygon<br /><table><tr><td style="text-align: center;"><img src="legend/SchluchtenPolygon_8_Amis0.png" /></td><td>Amis</td></tr><tr><td style="text-align: center;"><img src="legend/SchluchtenPolygon_8_Circus1.png" /></td><td>Circus</td></tr><tr><td style="text-align: center;"><img src="legend/SchluchtenPolygon_8_Dom2.png" /></td><td>Dom</td></tr><tr><td style="text-align: center;"><img src="legend/SchluchtenPolygon_8_Eros3.png" /></td><td>Eros</td></tr><tr><td style="text-align: center;"><img src="legend/SchluchtenPolygon_8_Furrow4.png" /></td><td>Furrow</td></tr><tr><td style="text-align: center;"><img src="legend/SchluchtenPolygon_8_Gaaseb5.png" /></td><td>Ga\'aseb</td></tr><tr><td style="text-align: center;"><img src="legend/SchluchtenPolygon_8_Hungorob6.png" /></td><td>Hungorob</td></tr><tr><td style="text-align: center;"><img src="legend/SchluchtenPolygon_8_Karoab7.png" /></td><td>Karoab</td></tr><tr><td style="text-align: center;"><img src="legend/SchluchtenPolygon_8_Märchen8.png" /></td><td>Märchen</td></tr><tr><td style="text-align: center;"><img src="legend/SchluchtenPolygon_8_Naib9.png" /></td><td>Naib</td></tr><tr><td style="text-align: center;"><img src="legend/SchluchtenPolygon_8_Numas10.png" /></td><td>Numas</td></tr><tr><td style="text-align: center;"><img src="legend/SchluchtenPolygon_8_Nuwuarib11.png" /></td><td>Nuwuarib</td></tr><tr><td style="text-align: center;"><img src="legend/SchluchtenPolygon_8_Orabes12.png" /></td><td>Orabes</td></tr><tr><td style="text-align: center;"><img src="legend/SchluchtenPolygon_8_Porters13.png" /></td><td>Porters</td></tr><tr><td style="text-align: center;"><img src="legend/SchluchtenPolygon_8_Quagga14.png" /></td><td>Quagga</td></tr><tr><td style="text-align: center;"><img src="legend/SchluchtenPolygon_8_Raiders15.png" /></td><td>Raiders</td></tr><tr><td style="text-align: center;"><img src="legend/SchluchtenPolygon_8_Schafschlucht16.png" /></td><td>Schafschlucht</td></tr><tr><td style="text-align: center;"><img src="legend/SchluchtenPolygon_8_Sesaub17.png" /></td><td>Sesaub</td></tr><tr><td style="text-align: center;"><img src="legend/SchluchtenPolygon_8_Sonusib18.png" /></td><td>Sonusib</td></tr><tr><td style="text-align: center;"><img src="legend/SchluchtenPolygon_8_Tsisab19.png" /></td><td>Tsisab</td></tr><tr><td style="text-align: center;"><img src="legend/SchluchtenPolygon_8_Umuab20.png" /></td><td>Umuab</td></tr><tr><td style="text-align: center;"><img src="legend/SchluchtenPolygon_8_21.png" /></td><td></td></tr></table>': layer_SchluchtenPolygon_8, '<img src="legend/water_to_points_7.png" /> water_to_points': layer_water_to_points_7, '<img src="legend/water_distance_lines_1000_6.png" /> water_distance_lines_1000': layer_water_distance_lines_1000_6, '<img src="legend/Wasser_5.png" /> Wasser': layer_Wasser_5, "hillshades": layer_hillshades_3, "satellite": layer_satellite_0, }).addTo(map);
+        L.control.layers(baseMaps, { 'Figures Quantity with Water in Sigth<br /><table><tr><td style="text-align: center;"><img src="legend/FiguresQuantitywithWaterinSigth_17_1100.png" /></td><td>1 - 10</td></tr><tr><td style="text-align: center;"><img src="legend/FiguresQuantitywithWaterinSigth_17_0201.png" /></td><td>0 - 20</td></tr><tr><td style="text-align: center;"><img src="legend/FiguresQuantitywithWaterinSigth_17_501002.png" /></td><td>50 - 100</td></tr><tr><td style="text-align: center;"><img src="legend/FiguresQuantitywithWaterinSigth_17_1005003.png" /></td><td>100 - 500</td></tr><tr><td style="text-align: center;"><img src="legend/FiguresQuantitywithWaterinSigth_17_50020004.png" /></td><td>500 - 2000</td></tr></table>': layer_FiguresQuantitywithWaterinSigth_17, 'Living Place with Figure Quantity<br /><table><tr><td style="text-align: center;"><img src="legend/LivingPlacewithFigureQuantity_16_1100.png" /></td><td>1 - 10</td></tr><tr><td style="text-align: center;"><img src="legend/LivingPlacewithFigureQuantity_16_0201.png" /></td><td>0 - 20</td></tr><tr><td style="text-align: center;"><img src="legend/LivingPlacewithFigureQuantity_16_501002.png" /></td><td>50 - 100</td></tr><tr><td style="text-align: center;"><img src="legend/LivingPlacewithFigureQuantity_16_1005003.png" /></td><td>100 - 500</td></tr><tr><td style="text-align: center;"><img src="legend/LivingPlacewithFigureQuantity_16_50020004.png" /></td><td>500 - 2000</td></tr></table>': layer_LivingPlacewithFigureQuantity_16, 'Living Place<br /><table><tr><td style="text-align: center;"><img src="legend/LivingPlace_15_verticalrock0.png" /></td><td>± vertical rock</td></tr><tr><td style="text-align: center;"><img src="legend/LivingPlace_15_spacious1.png" /></td><td>spacious</td></tr><tr><td style="text-align: center;"><img src="legend/LivingPlace_15_spaciousunfavourable2.png" /></td><td>spacious; unfavourable</td></tr><tr><td style="text-align: center;"><img src="legend/LivingPlace_15_spaciousunfavourableverticalrock3.png" /></td><td>spacious; unfavourable; ± vertical rock</td></tr></table>': layer_LivingPlace_15, 'Water in Sight<br /><table><tr><td style="text-align: center;"><img src="legend/WaterinSight_14_True0.png" /></td><td>True</td></tr></table>': layer_WaterinSight_14, 'Water Availability<br /><table><tr><td style="text-align: center;"><img src="legend/WaterAvailability_13_300m0.png" /></td><td><300m</td></tr><tr><td style="text-align: center;"><img src="legend/WaterAvailability_13_adjacent1.png" /></td><td>adjacent</td></tr><tr><td style="text-align: center;"><img src="legend/WaterAvailability_13_withinshoutingdistance2.png" /></td><td>within shouting distance</td></tr></table>': layer_WaterAvailability_13, 'Figures Quantity<br /><table><tr><td style="text-align: center;"><img src="legend/FiguresQuantity_12_1100.png" /></td><td>1 - 10</td></tr><tr><td style="text-align: center;"><img src="legend/FiguresQuantity_12_0201.png" /></td><td>0 - 20</td></tr><tr><td style="text-align: center;"><img src="legend/FiguresQuantity_12_501002.png" /></td><td>50 - 100</td></tr><tr><td style="text-align: center;"><img src="legend/FiguresQuantity_12_1005003.png" /></td><td>100 - 500</td></tr><tr><td style="text-align: center;"><img src="legend/FiguresQuantity_12_50020004.png" /></td><td>500 - 2000</td></tr></table>': layer_FiguresQuantity_12, 'Sites<br /><table><tr><td style="text-align: center;"><img src="legend/Sites_11_Amis0.png" /></td><td>Amis</td></tr><tr><td style="text-align: center;"><img src="legend/Sites_11_Circus1.png" /></td><td>Circus</td></tr><tr><td style="text-align: center;"><img src="legend/Sites_11_Dom2.png" /></td><td>Dom</td></tr><tr><td style="text-align: center;"><img src="legend/Sites_11_Eros3.png" /></td><td>Eros</td></tr><tr><td style="text-align: center;"><img src="legend/Sites_11_Furrow4.png" /></td><td>Furrow</td></tr><tr><td style="text-align: center;"><img src="legend/Sites_11_Gaaseb5.png" /></td><td>Ga\'aseb</td></tr><tr><td style="text-align: center;"><img src="legend/Sites_11_Hungorob6.png" /></td><td>Hungorob</td></tr><tr><td style="text-align: center;"><img src="legend/Sites_11_Karoab7.png" /></td><td>Karoab</td></tr><tr><td style="text-align: center;"><img src="legend/Sites_11_Märchen8.png" /></td><td>Märchen</td></tr><tr><td style="text-align: center;"><img src="legend/Sites_11_Naib9.png" /></td><td>Naib</td></tr><tr><td style="text-align: center;"><img src="legend/Sites_11_Numas10.png" /></td><td>Numas</td></tr><tr><td style="text-align: center;"><img src="legend/Sites_11_Orabes11.png" /></td><td>Orabes</td></tr><tr><td style="text-align: center;"><img src="legend/Sites_11_Porters12.png" /></td><td>Porters</td></tr><tr><td style="text-align: center;"><img src="legend/Sites_11_Quagga13.png" /></td><td>Quagga</td></tr><tr><td style="text-align: center;"><img src="legend/Sites_11_Raiders14.png" /></td><td>Raiders</td></tr><tr><td style="text-align: center;"><img src="legend/Sites_11_SesaubBasswaldrinne15.png" /></td><td>Sesaub / Basswaldrinne</td></tr><tr><td style="text-align: center;"><img src="legend/Sites_11_Umuab16.png" /></td><td>Umuab</td></tr></table>': layer_Sites_11, 'Gorges Polygons<br /><table><tr><td style="text-align: center;"><img src="legend/GorgesPolygons_10_Amis0.png" /></td><td>Amis</td></tr><tr><td style="text-align: center;"><img src="legend/GorgesPolygons_10_Circus1.png" /></td><td>Circus</td></tr><tr><td style="text-align: center;"><img src="legend/GorgesPolygons_10_Dom2.png" /></td><td>Dom</td></tr><tr><td style="text-align: center;"><img src="legend/GorgesPolygons_10_Eros3.png" /></td><td>Eros</td></tr><tr><td style="text-align: center;"><img src="legend/GorgesPolygons_10_Furrow4.png" /></td><td>Furrow</td></tr><tr><td style="text-align: center;"><img src="legend/GorgesPolygons_10_Gaaseb5.png" /></td><td>Ga\'aseb</td></tr><tr><td style="text-align: center;"><img src="legend/GorgesPolygons_10_Hungorob6.png" /></td><td>Hungorob</td></tr><tr><td style="text-align: center;"><img src="legend/GorgesPolygons_10_Karoab7.png" /></td><td>Karoab</td></tr><tr><td style="text-align: center;"><img src="legend/GorgesPolygons_10_Märchen8.png" /></td><td>Märchen</td></tr><tr><td style="text-align: center;"><img src="legend/GorgesPolygons_10_Naib9.png" /></td><td>Naib</td></tr><tr><td style="text-align: center;"><img src="legend/GorgesPolygons_10_Numas10.png" /></td><td>Numas</td></tr><tr><td style="text-align: center;"><img src="legend/GorgesPolygons_10_Nuwuarib11.png" /></td><td>Nuwuarib</td></tr><tr><td style="text-align: center;"><img src="legend/GorgesPolygons_10_Orabes12.png" /></td><td>Orabes</td></tr><tr><td style="text-align: center;"><img src="legend/GorgesPolygons_10_Porters13.png" /></td><td>Porters</td></tr><tr><td style="text-align: center;"><img src="legend/GorgesPolygons_10_Quagga14.png" /></td><td>Quagga</td></tr><tr><td style="text-align: center;"><img src="legend/GorgesPolygons_10_Raiders15.png" /></td><td>Raiders</td></tr><tr><td style="text-align: center;"><img src="legend/GorgesPolygons_10_Schafschlucht16.png" /></td><td>Schafschlucht</td></tr><tr><td style="text-align: center;"><img src="legend/GorgesPolygons_10_Sesaub17.png" /></td><td>Sesaub</td></tr><tr><td style="text-align: center;"><img src="legend/GorgesPolygons_10_Sonusib18.png" /></td><td>Sonusib</td></tr><tr><td style="text-align: center;"><img src="legend/GorgesPolygons_10_Tsisab19.png" /></td><td>Tsisab</td></tr><tr><td style="text-align: center;"><img src="legend/GorgesPolygons_10_Umuab20.png" /></td><td>Umuab</td></tr><tr><td style="text-align: center;"><img src="legend/GorgesPolygons_10_21.png" /></td><td></td></tr></table>': layer_GorgesPolygons_10, '<img src="legend/WatertoPoints_9.png" /> Water to Points': layer_WatertoPoints_9, '<img src="legend/WaterdistanceLines1000m_8.png" /> Water distance Lines <1000m': layer_WaterdistanceLines1000m_8, '<img src="legend/Water_7.png" /> Water': layer_Water_7, '<img src="legend/HeatmapElevationContourHeight_6.png" /> Heatmap Elevation Contour Height': layer_HeatmapElevationContourHeight_6, "Heatmap Elevation": layer_HeatmapElevation_5, "Topo Map": layer_TopoMap_3, "Satellite Map": layer_SatelliteMap_0, }).addTo(map);
         setBounds();
         var i = 0;
-        layer_water_distance_lines_1000_6.eachLayer(function (layer) {
+        layer_HeatmapElevationContourHeight_6.eachLayer(function (layer) {
             var context = {
                 feature: layer.feature,
                 variables: {}
             };
-            layer.bindTooltip((layer.feature.properties['HubDist'] !== null ? String('<div style="color: #ffffff; font-size: 10pt; font-family: \'Verdana\', sans-serif;">' + layer.feature.properties['HubDist']) + '</div>' : ''), { permanent: true, offset: [-0, -16], className: 'css_water_distance_lines_1000_6' });
+            layer.bindTooltip((exp_label_HeatmapElevationContourHeight_6_eval_expression(context) !== null ? String('<div style="color: #323232; font-size: 10pt; font-family: \'Open Sans\', sans-serif;">' + exp_label_HeatmapElevationContourHeight_6_eval_expression(context)) + '</div>' : ''), { permanent: true, offset: [-0, -16], className: 'css_HeatmapElevationContourHeight_6' });
+            labels.push(layer);
+            totalMarkers += 1;
+            layer.added = true;
+            addLabel(layer, i);
+            i++;
+        });
+        var i = 0;
+        layer_WaterdistanceLines1000m_8.eachLayer(function (layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['HubDist'] !== null ? String('<div style="color: #ffffff; font-size: 10pt; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['HubDist']) + '</div>' : ''), { permanent: true, offset: [-0, -16], className: 'css_WaterdistanceLines1000m_8' });
+            labels.push(layer);
+            totalMarkers += 1;
+            layer.added = true;
+            addLabel(layer, i);
+            i++;
+        });
+        var i = 0;
+        layer_GorgesPolygons_10.eachLayer(function (layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Name'] !== null ? String('<div style="color: #ffffff; font-size: 12pt; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['Name']) + '</div>' : ''), { permanent: true, offset: [-0, -16], className: 'css_GorgesPolygons_10' });
             labels.push(layer);
             totalMarkers += 1;
             layer.added = true;
@@ -1660,30 +1841,34 @@
                 return this._bounds;
             }
         });
-        resetLabels([layer_water_distance_lines_1000_6, layer_Figures_11]);
+        resetLabels([layer_HeatmapElevationContourHeight_6, layer_WaterdistanceLines1000m_8, layer_GorgesPolygons_10, layer_Sites_11, layer_WaterAvailability_13]);
         map.on("zoomend", function () {
-            resetLabels([layer_water_distance_lines_1000_6, layer_Figures_11]);
+            resetLabels([layer_HeatmapElevationContourHeight_6, layer_WaterdistanceLines1000m_8, layer_GorgesPolygons_10, layer_Sites_11, layer_WaterAvailability_13]);
         });
         map.on("layeradd", function () {
-            resetLabels([layer_water_distance_lines_1000_6, layer_Figures_11]);
+            resetLabels([layer_HeatmapElevationContourHeight_6, layer_WaterdistanceLines1000m_8, layer_GorgesPolygons_10, layer_Sites_11, layer_WaterAvailability_13]);
         });
         map.on("layerremove", function () {
-            resetLabels([layer_water_distance_lines_1000_6, layer_Figures_11]);
+            resetLabels([layer_HeatmapElevationContourHeight_6, layer_WaterdistanceLines1000m_8, layer_GorgesPolygons_10, layer_Sites_11, layer_WaterAvailability_13]);
         });
     </script>
 
+    <!-- GIS Map END -->
+
     <button onclick="scrollToTop()" id="scrollTopButton" class="scrollTopHidden" title="To top">To top</button>
 
+    <!-- FOOTER -->
     <footer>
         <p>Website created by
-            <a href="https://www.ilias.uni-koeln.de/ilias/" target="_blank">A-Team.
+            <a href="https://www.ilias.uni-koeln.de/ilias/goto_uk_usr_4664908.html" target="_blank">Janik Lierfeld.
             </a>Images and text were taken from a <a href="https://de.wikipedia.org/wiki/Brandbergmassiv"
                 target="_blank">Wikipedia</a> article.
         </p>
-        <p>Semester Project: BSI2</p>
-        <p>Summer Semester 2021</p>
-        <p class="imprint-btn"><a href="imprint.html"><i class="far fa-file-alt"></i></i>Imprint</a></p>
+        <p>Semester Project: BSI</p>
+        <p>Semester 2020/2021</p>
+        <p class="imprint-btn"><a href="imprint.html"><i class="far fa-file-alt"></i>Imprint</a></p>
     </footer>
+    
 </body>
 
 </html>
